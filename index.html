@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Office Digital · Dashboard Comercial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --verde:#263A21;
+  --verde-2:#3E5C37;
+  --verde-3:#4F7345;
+  --offwhite:#F5F6F2;
+  --mdf:#E7EEE3;
+  --mdf-2:#D7DECD;
+  --tinta:#1C2419;
+  --tinta-2:#5B6B54;
+  --branco:#FFFFFF;
+  --ouro:#D9A441;
+  --prata:#9B968A;
+  --bronze:#B4794A;
+  --raio:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Public Sans',system-ui,sans-serif;
+  background:var(--offwhite);
+  color:var(--tinta);
+  font-size:15px;
+  line-height:1.5;
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+
+/* ── Header ─────────────────────────── */
+header{
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.20), rgba(0,0,0,0) 35%),
+    var(--verde);
+  color:var(--offwhite);
+  padding:22px 28px 20px;
+  border-bottom:4px solid var(--verde-3);
+}
+.header-inner{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
+.header-brand{display:flex;align-items:center;gap:14px}
+.header-brand img{width:44px;height:44px;border-radius:9px}
+.brand-eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#B9CBB1;font-weight:600}
+h1{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:700;font-size:clamp(22px,3.2vw,32px);
+  letter-spacing:-.01em;line-height:1.1;margin-top:2px;
+}
+h1 em{font-style:normal;color:#9AC98A}
+.header-periodo-resumo{font-size:13px;color:#C7D6C1;text-align:right}
+.header-periodo-resumo strong{color:var(--offwhite)}
+
+/* ── Layout ─────────────────────────── */
+main{max-width:1180px;margin:0 auto;padding:22px 20px 64px}
+section{margin-top:34px}
+.sec-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:20px;letter-spacing:-.01em}
+.sec-head .sub{font-size:13px;color:var(--tinta-2)}
+
+/* ── Filtros ────────────────────────── */
+.filtros{
+  background:var(--branco);border:1px solid var(--mdf-2);border-radius:var(--raio);
+  padding:18px 20px;margin-top:20px;
+  box-shadow:0 1px 0 rgba(38,58,33,.05);
+}
+.filtro label{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-2);margin-bottom:10px}
+.filtro + .filtro{margin-top:18px}
+.periodo-toggles{display:flex;gap:10px;flex-wrap:wrap}
+.chip-mes{
+  font:inherit;font-size:14px;font-weight:600;color:var(--tinta);cursor:pointer;
+  background:var(--offwhite);border:1.5px solid var(--mdf-2);border-radius:99px;padding:9px 18px;
+  transition:background .15s,border-color .15s,color .15s;
+}
+.chip-mes:hover{background:var(--mdf)}
+.chip-mes.ativo{background:var(--verde);color:var(--offwhite);border-color:var(--verde)}
+.chip-mes:focus-visible{outline:2px solid var(--verde-3);outline-offset:2px}
+.filtro-data input[type="date"]{
+  font:inherit;font-size:14px;color:var(--tinta);
+  background:var(--offwhite);border:1px solid var(--mdf-2);border-radius:8px;padding:9px 12px;
+}
+.filtro-data input[type="date"]:focus-visible{outline:2px solid var(--verde-3);outline-offset:1px}
+.dias-toggles{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14px;color:var(--tinta);margin-top:10px}
+.dias-toggles[hidden]{display:none}
+.dias-toggles input[type="date"]{
+  font:inherit;font-size:14px;color:var(--tinta);
+  background:var(--offwhite);border:1px solid var(--mdf-2);border-radius:8px;padding:8px 10px;
+}
+.dias-toggles input[type="date"]:focus-visible{outline:2px solid var(--verde-3);outline-offset:1px}
+.botao-toggle-dias{
+  font:inherit;font-size:13.5px;font-weight:600;color:var(--verde-2);
+  background:var(--offwhite);border:1px solid var(--mdf-2);border-radius:8px;padding:9px 14px;cursor:pointer;
+}
+.botao-toggle-dias:hover{background:var(--mdf)}
+.botao-toggle-dias.ativo{background:var(--verde);color:var(--offwhite);border-color:var(--verde)}
+#limparDias{
+  font:inherit;font-size:12.5px;font-weight:600;color:var(--verde-2);
+  background:none;border:1px solid var(--mdf-2);border-radius:8px;padding:6px 12px;cursor:pointer;margin-left:4px;
+}
+#limparDias:hover{background:var(--mdf)}
+.info-atualizacao{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;
+  font-size:12.5px;color:var(--tinta-2);
+}
+.info-atualizacao label{font-weight:600}
+.info-atualizacao input[type="date"]{
+  font:inherit;font-size:13px;color:var(--tinta);
+  background:var(--branco);border:1px solid var(--mdf-2);border-radius:8px;padding:6px 10px;
+}
+.info-atualizacao input[type="date"]:focus-visible{outline:2px solid var(--verde-3);outline-offset:1px}
+.filtros-rodape{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px;padding-top:14px;border-top:1px solid var(--mdf)}
+.contagem-filtro{font-size:13px;color:var(--tinta-2)}
+.contagem-filtro strong{color:var(--tinta)}
+#limpar{
+  font:inherit;font-size:13px;font-weight:600;color:var(--verde-2);
+  background:none;border:1px solid var(--mdf-2);border-radius:8px;padding:7px 14px;cursor:pointer;
+}
+#limpar:hover{background:var(--mdf)}
+
+/* ── KPIs ───────────────────────────── */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:22px}
+.kpi{
+  background:var(--branco);border:1px solid var(--mdf-2);border-radius:var(--raio);
+  padding:16px 18px 14px;position:relative;overflow:hidden;
+}
+.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--verde-3)}
+.kpi.k-meta::before{background:var(--tinta-2)}
+.kpi.k-falta::before{background:var(--ouro)}
+.kpi.k-atg::before{background:var(--bronze)}
+.kpi.k-media-filtro::before{background:var(--verde-3)}
+.kpi.k-reembolso::before{background:#B05C4A}
+.kpis-ritmo{margin-top:14px}
+.kpi.k-dias::before{background:var(--verde-2)}
+.kpi.k-necessario::before{background:var(--bronze)}
+.kpi.k-media::before{background:var(--verde-3)}
+.kpi.k-ontem::before{background:var(--ouro)}
+.kpi .rotulo{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-2)}
+.kpi .valor{font-family:'Bricolage Grotesque',sans-serif;font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.15;margin-top:2px}
+.kpi .detalhe{font-size:12.5px;color:var(--tinta-2);margin-top:2px}
+
+.nota{font-size:12.5px;color:var(--tinta-2);margin-top:14px;line-height:1.5}
+.alerta-divergencia{
+  margin-top:14px;padding:12px 16px;border-radius:8px;
+  background:#FBF2E2;border:1px solid #E9CE9A;color:#6B4E1A;font-size:13px;line-height:1.5;
+}
+.alerta-divergencia strong{color:#4F3810}
+
+/* ── Cards ──────────────────────────── */
+.card{
+  background:var(--branco);border:1px solid var(--mdf-2);border-radius:var(--raio);
+  padding:18px 20px;box-shadow:0 1px 0 rgba(38,58,33,.05);
+}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:880px){.grid-2{grid-template-columns:1fr}}
+
+/* Barras estilo ripa (assinatura visual herdada do padrão Montagna Ads) */
+.slats{display:flex;flex-direction:column;gap:9px}
+.slat-row{display:grid;grid-template-columns:170px 1fr 92px;gap:10px;align-items:center;padding:2px 6px;border-radius:6px}
+@media(max-width:560px){.slat-row{grid-template-columns:120px 1fr 78px}}
+.slat-nome{font-size:13.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.slat-trilho{background:var(--mdf);border-radius:4px;height:22px;position:relative}
+.slat-barra{
+  height:100%;border-radius:4px;min-width:2px;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.10) 0 9px, rgba(0,0,0,.05) 9px 18px),
+    var(--cor,var(--verde-3));
+  border-right:2px solid rgba(0,0,0,.15);
+  transition:width .45s cubic-bezier(.2,.7,.3,1);
+}
+.slat-num{font-variant-numeric:tabular-nums;font-weight:600;font-size:13px;text-align:right;line-height:1.25}
+.rank-pos{display:inline-block;min-width:26px;font-weight:700;color:var(--tinta-2);font-variant-numeric:tabular-nums;font-size:12.5px}
+.slat-row.top1{background:linear-gradient(90deg, rgba(217,164,65,.16), transparent 75%)}
+.slat-row.top2{background:linear-gradient(90deg, rgba(155,150,138,.18), transparent 75%)}
+.slat-row.top3{background:linear-gradient(90deg, rgba(180,121,74,.16), transparent 75%)}
+.slat-row.top1 .rank-pos{color:var(--ouro)}
+.slat-row.top2 .rank-pos{color:var(--prata)}
+.slat-row.top3 .rank-pos{color:var(--bronze)}
+.vazio{padding:28px;text-align:center;color:var(--tinta-2);font-size:14px}
+
+/* Busca por nome dentro do ranking (filtra ou mostra todos) */
+.busca-nome-wrap{position:relative;margin-bottom:14px}
+.busca-nome{
+  width:100%;font:inherit;font-size:14px;color:var(--tinta);
+  background:var(--offwhite);border:1px solid var(--mdf-2);border-radius:8px;padding:9px 34px 9px 12px;
+}
+.busca-nome:focus-visible{outline:2px solid var(--verde-3);outline-offset:1px}
+.busca-nome-limpar{
+  position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--tinta-2);font-size:16px;cursor:pointer;padding:4px 8px;line-height:1;display:none;
+}
+.busca-nome-limpar.visivel{display:block}
+.busca-nome-info{font-size:12px;color:var(--tinta-2);margin-top:-8px;margin-bottom:10px}
+
+/* Gráfico de linha (variação diária) */
+#graficoLinhaWrap{position:relative}
+#graficoLinha{width:100%;height:auto;display:block}
+.tooltip{
+  position:absolute;pointer-events:none;background:var(--verde);color:var(--offwhite);
+  font-size:12.5px;padding:7px 11px;border-radius:7px;white-space:nowrap;
+  transform:translate(-50%,-115%);opacity:0;transition:opacity .12s;z-index:5;
+}
+.tooltip strong{color:#9AC98A}
+
+footer{max-width:1180px;margin:0 auto;padding:0 20px 36px;font-size:12.5px;color:var(--tinta-2)}
+
+/* ── Estrutura de times / categorias ─────────────────── */
+.info-times{
+  background:var(--branco);border:1px solid var(--mdf-2);border-radius:var(--raio);
+  padding:16px 20px;margin-top:20px;font-size:13px;color:var(--tinta-2);line-height:1.6;
+}
+.info-times strong{color:var(--tinta)}
+.legenda-categorias{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+.legenda-item{display:flex;align-items:center;gap:6px;font-size:12.5px}
+.legenda-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.legenda-dot.senior{background:var(--ouro)}
+.legenda-dot.pleno{background:var(--prata)}
+.legenda-dot.junior{background:var(--bronze)}
+
+.time-badge{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+  padding:2px 8px;border-radius:99px;color:var(--offwhite);white-space:nowrap;
+}
+.time-badge.tA{background:var(--verde-3)}
+.time-badge.tB{background:var(--verde-2)}
+.time-badge.t1{background:var(--bronze)}
+.time-badge.t2{background:#8A6C3D}
+
+.cat-badge{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+  padding:2px 8px;border-radius:99px;color:var(--tinta);white-space:nowrap;
+}
+.cat-badge.senior{background:#F3E1B8;color:#6B4E1A}
+.cat-badge.pleno{background:#E7E5DF;color:#4A473E}
+.cat-badge.junior{background:#E9D3BE;color:#5C3B1E}
+
+.lider-tag{font-size:10.5px;color:var(--verde-2);font-weight:700}
+
+/* Cards de time */
+.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:880px){.team-grid{grid-template-columns:1fr}}
+.team-grid + .team-grid{margin-top:16px}
+.team-grid-label{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-2);margin:20px 0 8px}
+.team-grid-label:first-child{margin-top:0}
+.team-card{
+  background:var(--branco);border:1px solid var(--mdf-2);border-radius:var(--raio);
+  padding:16px 18px;box-shadow:0 1px 0 rgba(38,58,33,.05);
+}
+.team-card-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.team-card-nome{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px}
+.team-card-lider{font-size:12px;color:var(--tinta-2)}
+.team-card-nums{display:flex;align-items:baseline;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.team-card-total{font-family:'Bricolage Grotesque',sans-serif;font-size:24px;font-weight:700}
+.team-card-meta{font-size:12.5px;color:var(--tinta-2)}
+.team-card-trilho{background:var(--mdf);border-radius:4px;height:10px;margin:8px 0 10px;overflow:hidden}
+.team-card-barra{height:100%;border-radius:4px;background:var(--verde-3);transition:width .45s cubic-bezier(.2,.7,.3,1)}
+.team-card-pct{font-size:12px;font-weight:600;color:var(--tinta-2);margin-bottom:10px}
+.team-card-membros{display:flex;flex-direction:column;gap:5px;border-top:1px solid var(--mdf);padding-top:8px}
+.team-card-membro{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;gap:8px}
+.team-card-membro .m-nome{display:flex;align-items:center;gap:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.team-card-membro .m-valor{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+
+/* Atingimento individual */
+.categoria-heading{
+  font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-2);
+  margin:16px 0 8px;display:flex;align-items:center;gap:8px;
+}
+.categoria-heading:first-child{margin-top:0}
+.individual-list{display:flex;flex-direction:column;gap:10px}
+.individual-row{padding:2px 2px}
+.individual-row-topo{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:4px;flex-wrap:wrap}
+.individual-nome{font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:7px}
+.individual-num{font-size:12.5px;color:var(--tinta-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.individual-num strong{color:var(--tinta)}
+.individual-bar-trilho{background:var(--mdf);border-radius:4px;height:14px;position:relative;overflow:hidden}
+.individual-bar{height:100%;border-radius:4px;min-width:2px;transition:width .45s cubic-bezier(.2,.7,.3,1)}
+.individual-bar.senior{background:var(--ouro)}
+.individual-bar.pleno{background:var(--prata)}
+.individual-bar.junior{background:var(--bronze)}
+.individual-bar.bateu{background:var(--verde-3)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-brand">
+      <img src="data:image/png;base64,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" alt="Home Office Digital">
+      <div>
+        <div class="brand-eyebrow">Home Office Digital · Dashboard Comercial</div>
+        <h1>Performance <em>Closers &amp; SDRs</em></h1>
+      </div>
+    </div>
+    <div class="header-periodo-resumo">
+      Dados atualizados até<br><strong id="hdrDataAtualizacao">–</strong>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Filtros -->
+  <div class="filtros" role="region" aria-label="Filtros">
+    <div class="filtro">
+      <label>Filtro de período — selecione um ou mais meses (somam-se automaticamente)</label>
+      <div class="periodo-toggles" id="toggleMeses"></div>
+    </div>
+    <div class="filtro filtro-dias">
+      <button type="button" id="toggleFiltroDias" class="botao-toggle-dias">📅 Filtrar por dia</button>
+      <div class="dias-toggles" id="painelDias" hidden>
+        <span>de</span>
+        <input type="date" id="diaIniCal">
+        <span>até</span>
+        <input type="date" id="diaFimCal">
+        <button type="button" id="limparDias">Ver mês(es) completo(s)</button>
+      </div>
+    </div>
+    <div class="filtros-rodape">
+      <div class="contagem-filtro" id="contagem"></div>
+      <button id="limpar">Selecionar todos os meses</button>
+    </div>
+  </div>
+
+  <!-- Info: data da atualização (não é filtro, só referência para os cartões de ritmo) -->
+  <div class="info-atualizacao">
+    <label for="dataAtualizacao">Data da atualização (referência para "dias restantes", "necessário por dia" e "ontem")</label>
+    <input type="date" id="dataAtualizacao">
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpis">
+    <div class="kpi k-meta"><div class="rotulo">Meta do período</div><div class="valor" id="kMeta">–</div><div class="detalhe" id="kMetaDet"></div></div>
+    <div class="kpi"><div class="rotulo">Total vendido</div><div class="valor" id="kTotal">–</div><div class="detalhe" id="kTotalDet"></div></div>
+    <div class="kpi k-falta"><div class="rotulo">Falta para a meta</div><div class="valor" id="kFalta">–</div><div class="detalhe" id="kFaltaDet"></div></div>
+    <div class="kpi k-atg"><div class="rotulo">% atingimento</div><div class="valor" id="kAtg">–</div><div class="detalhe">sobre a meta do período</div></div>
+    <div class="kpi k-media-filtro"><div class="rotulo">Média diária (no filtro)</div><div class="valor" id="kMediaFiltro">–</div><div class="detalhe" id="kMediaFiltroDet"></div></div>
+  </div>
+
+  <div class="kpis kpis-ritmo" id="blocoRitmo">
+    <div class="kpi k-dias"><div class="rotulo">Dias restantes para a meta</div><div class="valor" id="kDias">–</div><div class="detalhe" id="kDiasDet"></div></div>
+    <div class="kpi k-necessario"><div class="rotulo">Necessário por dia</div><div class="valor" id="kNecessario">–</div><div class="detalhe" id="kNecessarioDet"></div></div>
+    <div class="kpi k-ontem"><div class="rotulo">Quanto fizemos ontem</div><div class="valor" id="kOntem">–</div><div class="detalhe" id="kOntemDet"></div></div>
+  </div>
+
+  <!-- Desempenho por Time -->
+  <section>
+    <div class="sec-head"><h2>Desempenho por Time</h2><span class="sub" id="timesSub">meta de cada time = metade da meta geral do período selecionado</span></div>
+    <div class="team-grid-label">Closers</div>
+    <div class="team-grid" id="gTimesCloser"></div>
+    <div class="team-grid-label">SDRs</div>
+    <div class="team-grid" id="gTimesSdr"></div>
+  </section>
+
+  <!-- Atingimento individual (por categoria) -->
+  <section>
+    <div class="sec-head"><h2>Atingimento individual — meta por categoria</h2><span class="sub" id="individualSub">meta mensal por categoria × nº de meses selecionados</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="sec-head" style="margin-bottom:8px"><h2 style="font-size:15px">Closers</h2></div>
+        <div id="gIndividualCloser"></div>
+      </div>
+      <div class="card">
+        <div class="sec-head" style="margin-bottom:8px"><h2 style="font-size:15px">SDRs</h2></div>
+        <div id="gIndividualSdr"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rankings -->
+  <section>
+    <div class="grid-2">
+      <div class="card">
+        <div class="sec-head"><h2>Ranking — Closers</h2><span class="sub">quem mais faturou no período — busque um nome ou veja todos</span></div>
+        <div class="busca-nome-wrap">
+          <input type="search" class="busca-nome" id="buscaCloser" placeholder="Buscar closer pelo nome...">
+          <button type="button" class="busca-nome-limpar" id="limpaBuscaCloser" aria-label="Limpar busca">✕</button>
+        </div>
+        <div class="busca-nome-info" id="infoCloser"></div>
+        <div class="slats" id="gCloser"></div>
+      </div>
+      <div class="card">
+        <div class="sec-head"><h2>Ranking — SDRs</h2><span class="sub">quem mais originou faturamento no período — busque um nome ou veja todos</span></div>
+        <div class="busca-nome-wrap">
+          <input type="search" class="busca-nome" id="buscaSdr" placeholder="Buscar SDR pelo nome...">
+          <button type="button" class="busca-nome-limpar" id="limpaBuscaSdr" aria-label="Limpar busca">✕</button>
+        </div>
+        <div class="busca-nome-info" id="infoSdr"></div>
+        <div class="slats" id="gSdr"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gráfico de linha: variação diária do mês corrente -->
+  <section>
+    <div class="sec-head"><h2>Variação diária de vendas</h2><span class="sub" id="graficoLinhaSub">evolução dia a dia do mês corrente</span></div>
+    <div class="card">
+      <div id="graficoLinhaWrap">
+        <svg id="graficoLinha" viewBox="0 0 920 260" role="img" aria-label="Gráfico de variação diária de vendas"></svg>
+        <div class="tooltip" id="tipGraficoLinha"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reembolsos -->
+  <section>
+    <div class="sec-head"><h2>Reembolsos</h2><span class="sub" id="reembolsosSub">pedidos pagos e cancelados em até 7 dias — não entram no total vendido, mas contam aqui por closer/SDR</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="sec-head" style="margin-bottom:8px"><h2 style="font-size:15px">Por Closer</h2></div>
+        <div class="slats" id="gReembolsoCloser"></div>
+      </div>
+      <div class="card">
+        <div class="sec-head" style="margin-bottom:8px"><h2 style="font-size:15px">Por SDR</h2></div>
+        <div class="slats" id="gReembolsoSdr"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="nota">
+    Nota: a meta é única e mensal para a operação (mesmo valor usado para Closers e SDRs). O total vendido é calculado a partir das
+    vendas concretizadas pelos closers; o total de SDRs deve ser igual, pois é a mesma venda contabilizada duas vezes — uma para o
+    closer que fechou, outra para o SDR que qualificou e encaminhou o lead.
+  </div>
+  <div class="alerta-divergencia" id="alertaDivergencia" style="display:none"></div>
+
+  <!-- Estrutura de times -->
+  <div class="info-times">
+    <strong>Estrutura comercial (a partir de setembro/26):</strong> Closers em <strong>Time A</strong> (Portuga · líder, Paulo, Túlio, Luigi) e <strong>Time B</strong> (Edu · líder, Larissa, Rodrigo, Misael). SDRs em <strong>Time 1</strong> (Rafael · líder, Beatriz, Vitor, Carioca) e <strong>Time 2</strong> (Michelly · líder, Leandro, Gustavo, Iasmin). Cada pessoa também tem uma categoria com meta individual mensal — os valores de SDR e Closer não se somam entre si (são complementares: a mesma venda é contabilizada uma vez do lado do closer e uma vez do lado do SDR).
+    <div class="legenda-categorias">
+      <span class="legenda-item"><span class="legenda-dot senior"></span>Sênior — meta R$ 85.000/mês</span>
+      <span class="legenda-item"><span class="legenda-dot pleno"></span>Pleno — meta R$ 65.000/mês</span>
+      <span class="legenda-item"><span class="legenda-dot junior"></span>Júnior — meta R$ 50.000/mês</span>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Fonte: planilha comercial HOD (Portal do Seller / CRM) · Junho–Agosto de 2026 · Dashboard produzido por Montagna Ads.
+</footer>
+
+<script>
+const DADOS = {"meses": ["Janeiro/26", "Fevereiro/26", "Março/26", "Abril/26", "Maio/26", "Junho/26", "Julho/26", "Agosto/26", "Setembro/26"], "metas": [111212.79, 137069.2, 176472.66, 261172.05, 340000, 400000, 450000, 520000, 500000.0], "closers": ["ALVARO", "AUTOMÁTICO", "EDUARDO", "GRAZI", "KARINA", "LARISSA", "LEANDRO PT", "LUCCAS", "LUIGI", "MARCOS", "MARRAZZO", "MISAEL", "NATHAN", "PAULO", "RAFAEL", "RODRIGO", "TÚLIO"], "sdrs": ["ANA PAULA", "BEATRIZ", "CARIOCA", "EDUARDO", "ELLEN", "GUSTAVO", "IASMIN", "JÚLIA", "KARINA", "KASSIA INDICAÇÃO", "LARA", "LARISSA", "LEANDRO B.", "LEANDRO PT", "LUCCAS", "LUIGI", "MARCOS", "MICHELLY", "MISAEL", "RAFAEL", "RENOVAÇÃO", "RODRIGO", "SEM SDR", "TÚLIO", "VINÍCIUS", "VITOR", "PAULO"], "diarioCloser": {"MARCOS": [{"1": 4216.4, "14": 2397.6, "21": 2806.8, "22": 1990.0, "23": 2480.0, "25": 744.0, "27": 2397.6, "31": 4524.4}, {"2": 149.9, "4": 4500.0, "10": 3014.04, "11": 4190.4, "12": 2397.6, "13": 1795.2, "17": 1990.0, "19": 3491.7, "25": 409.2, "26": 1450.0}, {"2": 149.9, "3": 2397.6, "4": 1990.0, "5": 4297.6, "10": 2397.6, "12": 2415.2, "14": 1795.2, "16": 1500.0, "19": 2397.6, "26": 422.6}, {"3": 1795.2, "6": 500.0, "7": 2299.14, "8": 2397.6, "9": 2397.6, "11": 300.0, "14": 2397.6, "15": 3300.0, "24": 590.0, "27": 422.6, "28": 990.0, "29": 5083.52}, {"11": 4192.8, "18": 1192.8, "27": 422.6, "29": 585.0}, {}, {}, {}, {}], "LUCCAS": [{"1": 6225.75, "13": 2388.0, "14": 1178.0, "21": 1795.2, "29": 558.0, "30": 199.99}, {"4": 2397.6, "6": 2220.75, "10": 2989.75, "11": 2397.6, "12": 200.0, "19": 7597.6, "28": 199.99}, {"6": 2397.6, "12": 2988.0, "13": 1795.2, "19": 1910.0, "20": 4148.4, "31": 2480.0}, {"2": 199.99, "29": 3657.4, "30": 4190.4}, {"2": 199.99, "12": 2988.0, "13": 2980.0, "14": 2397.6, "19": 4795.2, "20": 1795.2, "21": 4795.2, "28": 9775.2, "29": 4063.94, "30": 3897.6}, {"1": 2480.0, "2": 199.99, "3": 8789.75, "8": 2397.6, "11": 5385.6, "15": 4783.2, "18": 393.36, "24": 1990.0, "26": 3590.4, "30": 1795.2}, {"2": 199.99}, {"2": 199.99}, {}], "MARRAZZO": [{"1": 2397.6}, {}, {}, {}, {}, {}, {}, {}, {}], "TÚLIO": [{"1": 2388.72, "14": 3595.2, "20": 1000.0, "23": 3865.33, "26": 8190.4, "28": 4488.0, "29": 6988.0, "31": 200.0}, {"3": 882.2, "4": 7988.0, "5": 1500.0, "10": 6393.78, "12": 3397.6, "13": 4590.4, "18": 2985.39, "19": 4523.3, "23": 4190.4, "24": 3590.4, "26": 1192.8}, {"2": 1945.2, "4": 2397.6, "5": 3590.4, "9": 2250.0, "10": 3440.19, "11": 2397.6, "12": 4783.2, "16": 1190.19, "18": 1795.2, "19": 1795.2, "20": 2397.6, "27": 3000.0, "30": 3590.4, "31": 2397.6}, {"2": 2900.0, "3": 100.0, "6": 3200.0, "7": 3605.9, "8": 533.85, "9": 700.0, "10": 8849.29, "13": 2988.0, "15": 3595.2, "16": 8888.72, "17": 2897.6, "18": 1750.0, "20": 3588.0, "22": 2988.0, "27": 500.0, "30": 6197.6}, {"6": 594.11, "11": 4338.0, "14": 600.0, "15": 2988.0, "18": 1192.8, "19": 1000.0, "20": 4738.0, "21": 1795.2, "23": 700.0, "25": 1192.8, "26": 2300.0, "27": 2622.8, "30": 3590.4}, {"2": 2795.2, "3": 5088.0, "4": 4795.2, "6": 500.0, "8": 370.0, "9": 4795.2, "10": 2988.0, "11": 4534.2, "12": 1600.0, "15": 1192.8, "16": 5976.0, "17": 5024.5, "18": 4783.2, "19": 2394.04, "22": 299.93, "23": 6092.8, "26": 2397.6, "30": 4502.4}, {"1": 2700.0, "3": 4192.8, "6": 4590.4, "7": 2002.4, "10": 4387.93, "11": 4795.2, "14": 4598.52, "15": 2000.0, "16": 553.62, "17": 9685.2, "20": 299.93, "22": 2397.6, "23": 2890.16, "27": 1192.8, "28": 700.0, "29": 3785.2, "30": 3590.4, "31": 1795.2}, {"10": 6788.0, "11": 299.93, "12": 2740.8, "13": 2397.6, "17": 7597.6, "19": 1795.2, "20": 3288.0, "21": 4791.64, "26": 1000.0, "28": 3590.4, "31": 2300.0, "4": 1600.0, "5": 845.68}, {"3": 2199.86}], "LEANDRO PT": [{"1": 7178.4, "14": 911.4, "15": 1158.0, "16": 1900.0, "18": 434.0, "19": 2988.0, "20": 2988.0, "22": 2988.0, "23": 1394.8, "25": 4192.8, "26": 2200.0, "27": 2397.6, "28": 2397.6, "29": 5787.2, "30": 434.0, "31": 2858.0}, {"1": 2980.0, "2": 3414.0, "3": 3590.4, "4": 434.0, "5": 1434.0, "9": 3743.0, "12": 3590.4, "16": 2729.2, "18": 4190.4, "19": 1424.0, "20": 3590.4, "21": 500.0, "23": 6958.0, "25": 3590.4, "26": 3480.0, "28": 868.0}, {"4": 1000.0, "5": 434.0, "6": 1980.0, "7": 4190.4, "9": 800.0, "10": 1795.2, "11": 6180.4, "12": 5215.03, "14": 2617.88, "17": 10623.2, "18": 4192.8, "19": 2988.0, "20": 5628.61, "23": 4977.84, "25": 602.4, "26": 4795.2, "28": 954.05, "30": 3047.6, "31": 5580.4}, {"2": 576.27, "8": 3970.0, "9": 2812.8, "10": 7978.0, "11": 4790.4, "12": 420.0, "14": 4949.36, "15": 5966.27, "16": 2397.6, "18": 1192.8, "19": 6548.45, "21": 5428.61, "22": 7000.16, "23": 3590.4, "24": 2397.6, "26": 200.0, "29": 3325.52, "30": 19093.08}, {"1": 406.0, "4": 5272.48, "6": 2988.0, "7": 2080.0, "8": 4376.0, "9": 1980.0, "10": 2980.0, "11": 8859.82, "12": 7909.5, "13": 3590.4, "14": 7036.76, "15": 4591.96, "16": 2226.2, "18": 5096.4, "19": 3656.2, "20": 2397.6, "21": 8590.4, "22": 750.0, "23": 4795.2, "25": 2988.0, "26": 500.0, "27": 6283.1, "28": 9785.25, "29": 3207.6, "30": 832.75, "31": 5544.16}, {"2": 990.0, "3": 3385.6, "4": 990.0, "6": 2988.0, "7": 2397.6, "8": 7978.0, "10": 3081.7, "11": 1620.0, "15": 597.0, "16": 4003.4, "17": 3397.6, "18": 7180.8, "19": 2988.0, "24": 2397.6, "25": 6578.4, "26": 3590.4, "27": 2194.8, "29": 11873.89, "30": 13181.0}, {"1": 3387.6, "2": 2980.0, "3": 5960.0, "4": 2397.6, "6": 2739.0, "7": 2988.0, "8": 4702.0, "9": 1192.8, "10": 3390.0, "11": 2397.6, "13": 2739.0, "14": 4795.2, "15": 9375.6, "17": 2738.0, "20": 8836.81, "23": 2804.1, "24": 4722.76, "27": 2390.0, "28": 1824.75, "29": 10832.0, "30": 15570.0, "31": 16002.36}, {"10": 3325.0, "12": 4795.2, "13": 2295.2, "14": 5744.12, "15": 2397.6, "17": 11849.35, "18": 1490.0, "19": 500.0, "20": 5728.8, "21": 6228.96, "23": 2988.0, "24": 1192.8, "27": 2397.6, "28": 7139.3, "29": 6180.4, "31": 8036.0, "2": 2172.0, "3": 597.0, "6": 790.0, "8": 3590.4}, {"1": 3310.6, "2": 1192.8, "3": 1990.0, "6": 5146.2, "7": 2364.56}], "NATHAN": [{"1": 1990.0}, {}, {}, {}, {}, {}, {}, {}, {}], "KARINA": [{}, {"23": 349.0, "24": 4783.2, "26": 2795.2}, {"3": 2988.0}, {}, {}, {}, {}, {}, {}], "GRAZI": [{}, {}, {"3": 1795.2, "10": 250.0, "13": 2397.6, "17": 3590.4, "23": 1798.32}, {"8": 2000.0, "10": 1100.0, "13": 2988.0, "15": 2397.6, "27": 1795.2, "30": 3897.6}, {"5": 600.0}, {}, {}, {}, {}], "LARISSA": [{}, {}, {"13": 1795.2, "23": 3257.45, "24": 1990.0, "25": 4788.0, "31": 1045.0}, {"1": 2988.0, "2": 4326.6, "7": 5127.67, "8": 2044.2, "11": 2397.6, "14": 3590.4, "15": 2980.0, "16": 577.71, "17": 2988.0, "18": 1195.2, "23": 2988.0, "25": 1000.0, "27": 2988.0, "28": 1192.8, "29": 5975.0, "30": 2495.0}, {"1": 1795.2, "11": 2397.6, "13": 2988.0, "16": 1192.8, "18": 1195.0, "20": 2988.0, "21": 3899.6, "26": 3495.0, "27": 3887.6, "29": 9578.4, "30": 2044.2}, {"2": 2988.0, "3": 6578.4, "5": 4688.0, "6": 1910.0, "8": 2988.0, "11": 3590.4, "12": 6496.2, "13": 5500.8, "17": 4130.8, "18": 2988.0, "19": 6979.1, "22": 602.4, "23": 1910.4, "25": 195.0, "26": 7185.6, "30": 2397.6}, {"6": 5828.4, "7": 2498.32, "9": 5988.0, "10": 1990.0, "16": 12564.0, "17": 4192.8, "18": 800.0, "20": 2988.0, "23": 5976.0, "29": 1093.8}, {"11": 2795.2, "12": 2397.6, "13": 1576.27, "14": 3040.8, "17": 4795.2, "19": 4190.4, "20": 4190.4, "24": 5727.0, "25": 3741.8, "26": 1948.0, "29": 6490.4, "31": 588.0, "6": 4971.52, "7": 3590.4}, {"5": 2299.14}], "AUTOMÁTICO": [{}, {}, {"16": 238.0}, {}, {}, {}, {}, {}, {}], "RAFAEL": [{}, {}, {"17": 5697.6, "20": 4188.0, "31": 598.0}, {"2": 4185.2, "9": 2288.94, "10": 2397.6, "14": 2480.0, "15": 6988.0, "17": 1192.8, "22": 4190.4, "29": 4783.2, "30": 7192.8}, {"2": 4795.2, "4": 2397.6, "5": 2988.0, "6": 1192.8, "11": 3590.4, "12": 2397.6, "13": 2092.8, "14": 2000.0, "15": 700.0, "18": 1192.8, "19": 300.0, "20": 2747.6, "25": 1776.72, "30": 3590.4}, {"2": 2988.0, "4": 2397.6, "6": 2785.37, "8": 2385.6, "9": 3590.4, "12": 1690.0, "16": 1492.8, "17": 800.0, "19": 2400.0, "23": 4180.8, "24": 2856.23, "26": 1800.0, "30": 3590.4}, {"1": 2397.6, "2": 5055.43, "10": 4877.6, "31": 2988.0}, {"10": 330.01, "24": 1192.8, "31": 3590.4}, {"4": 700.0}], "EDUARDO": [{}, {}, {}, {}, {"6": 2988.0, "8": 1490.0, "11": 1795.2, "13": 3035.2, "18": 5976.0, "19": 4190.4, "26": 700.0, "27": 2988.0, "28": 2397.6, "29": 7783.2, "30": 2397.6, "31": 2988.0}, {"3": 4888.0, "5": 540.0, "9": 5385.6, "10": 4795.2, "11": 4396.2, "13": 2980.0, "15": 6492.8, "16": 4200.0, "18": 6578.4, "19": 2474.76, "22": 3397.6, "23": 299.93, "24": 3205.73, "25": 5385.6, "26": 11657.29, "29": 1795.2}, {"6": 3590.4, "7": 2000.0, "8": 2989.75, "9": 5286.9, "10": 7783.2, "13": 299.93, "15": 500.0, "17": 7680.8, "20": 330.01, "22": 3468.62, "23": 4795.2, "24": 12477.3, "28": 4190.4, "29": 5388.0, "30": 4592.4, "31": 8137.2}, {"10": 3590.4, "14": 4795.2, "17": 5848.08, "20": 299.93, "21": 5388.0, "22": 4764.49, "25": 9588.0, "26": 3590.4, "28": 4190.4, "31": 3688.0, "2": 1490.0, "7": 3980.0}, {"1": 1490.0}], "MISAEL": [{}, {}, {}, {}, {"12": 1192.8, "13": 1192.8, "14": 2397.6, "15": 1192.8, "16": 1795.2, "19": 2397.6, "22": 3000.0, "28": 1490.0, "30": 930.81}, {"2": 2130.81, "3": 6785.2, "4": 959.0, "6": 1795.2, "8": 1487.8, "9": 6526.32, "13": 4783.2, "18": 632.95, "19": 2988.0, "22": 3533.37, "24": 1000.0, "25": 2397.6, "26": 1900.0, "27": 500.0, "28": 1798.32, "29": 3590.4, "30": 3785.2}, {"1": 2300.0, "2": 982.0, "3": 1798.32, "6": 6783.2, "7": 3484.4, "8": 3192.9, "9": 1192.8, "10": 500.0, "15": 2397.6, "16": 2998.32, "17": 3590.4, "20": 550.0, "23": 1300.0, "25": 3590.4, "31": 1795.2}, {"10": 4846.0, "12": 500.0, "13": 500.0, "17": 903.6, "19": 588.0, "21": 1192.8, "24": 1507.5, "26": 2048.0, "27": 2739.0, "31": 2295.2, "1": 700.0, "3": 2500.0, "4": 2988.0, "5": 1192.8, "7": 7178.4}, {"1": 1795.2, "5": 4795.2}], "RODRIGO": [{}, {}, {}, {}, {}, {"26": 3394.72}, {"17": 2988.0}, {"13": 3488.0, "20": 10378.4, "21": 2390.4, "24": 2988.0, "25": 2988.0, "28": 5107.64, "29": 2988.0, "31": 2980.0}, {"2": 3590.4, "5": 2988.0, "7": 3346.91}], "PAULO": [{}, {}, {}, {}, {}, {}, {"17": 2988.0, "23": 2397.6, "27": 2168.76, "28": 4795.2, "30": 2739.0, "31": 2480.0}, {"11": 2988.0, "13": 500.0, "17": 5997.6, "20": 4533.92, "24": 1192.8, "28": 5303.4, "31": 6013.9}, {}], "LUIGI": [{}, {}, {}, {}, {}, {}, {"17": 2397.6, "21": 4180.8, "23": 2988.0, "27": 2988.0, "30": 2740.75, "31": 699.08}, {"11": 6593.52, "12": 500.0, "13": 0.0, "14": 1192.8, "17": 3749.16, "18": 1299.41, "21": 3590.4, "26": 1795.2, "31": 3592.32}, {}], "ALVARO": [{}, {}, {}, {}, {}, {}, {"20": 2988.0, "23": 4795.2}, {"27": 1646.2, "31": 1795.2, "5": 2397.6, "7": 2988.0}, {}]}, "diarioSDR": {"SEM SDR": [{"1": 1939.55, "14": 3575.6, "15": 600.0, "25": 4936.8, "30": 199.99}, {"2": 434.0, "4": 2397.6, "9": 911.4, "10": 620.0, "19": 434.0, "25": 409.2}, {"16": 238.0, "26": 422.6}, {"8": 533.85, "27": 422.6, "29": 3657.4, "30": 4190.4}, {"11": 500.0, "19": 4795.2, "29": 1732.24}, {"6": 500.0, "11": 5596.2, "15": 597.0, "19": 2988.0, "27": 500.0, "30": 1795.2}, {"1": 2397.6, "3": 602.4, "7": 500.0, "10": 600.0, "15": 1000.0, "23": 500.0}, {"17": 600.0, "3": 597.0}, {}], "MICHELLY": [{"1": 16478.92, "13": 2388.0, "14": 4506.6, "15": 558.0, "18": 434.0, "19": 2988.0, "20": 1000.0, "21": 4602.0, "22": 1990.0, "27": 2397.6, "28": 2988.0, "29": 8538.0, "30": 434.0, "31": 1802.0}, {"2": 149.9, "3": 882.2, "4": 8422.0, "5": 1500.0, "6": 2220.75, "9": 2831.6, "10": 4190.4, "11": 2397.6, "12": 3397.6, "13": 2795.2, "16": 2229.2, "18": 1795.2, "19": 4491.7, "20": 3590.4, "23": 6958.0, "24": 5385.6, "25": 3590.4, "26": 5622.8, "28": 1067.99}, {"2": 299.9, "3": 5385.6, "4": 2397.6, "5": 434.0, "6": 3387.6, "9": 2250.0, "10": 4647.6, "11": 6588.0, "12": 10186.4, "13": 4192.8, "16": 1500.0, "17": 868.0, "18": 1795.2, "19": 4192.8, "20": 5586.61, "23": 4509.2, "24": 1990.0, "25": 2390.4, "28": 954.05, "30": 650.0, "31": 4437.6}, {"2": 9798.06, "3": 100.0, "7": 2415.2, "8": 5387.6, "9": 4005.6, "10": 13612.5, "11": 2697.6, "12": 420.0, "13": 2988.0, "14": 7942.76, "15": 10483.87, "16": 7671.23, "17": 6578.4, "20": 3588.0, "21": 1438.21, "22": 1649.76, "24": 590.0, "25": 1000.0, "27": 1795.2, "28": 1192.8, "29": 11397.04, "30": 7691.2}, {"1": 2201.2, "2": 2597.59, "5": 3588.0, "6": 2988.0, "7": 1290.0, "8": 906.0, "9": 990.0, "10": 2980.0, "11": 6409.5, "12": 11499.9, "13": 2432.8, "14": 4397.6, "15": 8772.76, "16": 5214.2, "18": 13458.0, "19": 9878.0, "20": 7530.8, "21": 2706.8, "22": 3000.0, "23": 700.0, "26": 4195.0, "27": 8323.4, "28": 10285.25, "29": 10317.1, "30": 3205.36, "31": 5054.16}, {"2": 3320.8, "3": 6976.0, "4": 959.0, "5": 2240.0, "6": 4783.2, "8": 6168.6, "9": 7933.92, "10": 2397.6, "11": 3159.0, "12": 3895.8, "15": 4783.2, "16": 4613.0, "17": 5922.1, "18": 4014.31, "19": 5183.9, "22": 3533.37, "23": 7098.33, "24": 7061.96, "25": 14556.6, "26": 12585.12, "28": 1798.32, "29": 10669.09, "30": 6601.6}, {"1": 3990.0, "2": 2653.19, "3": 5960.0, "6": 5783.2, "7": 6384.4, "8": 912.0, "9": 7082.1, "10": 2779.93, "13": 299.93, "15": 3590.4, "16": 2988.0, "17": 1490.0, "20": 880.01, "23": 2804.1, "24": 15017.26, "27": 1192.8, "28": 6169.4, "29": 8888.0, "31": 8283.2}, {"10": 1850.01, "12": 500.0, "13": 1000.0, "14": 1192.8, "17": 3986.35, "19": 588.0, "20": 7778.33, "21": 8746.44, "24": 500.0, "25": 4792.8, "26": 5138.4, "28": 4610.4, "31": 14266.32, "1": 200.0, "2": 199.99, "3": 2500.0, "5": 2697.53, "6": 790.0, "7": 3980.0}, {"1": 2810.6}], "RENOVAÇÃO": [{"1": 1788.0}, {"19": 4297.6}, {"13": 1795.2, "19": 1910.0}, {}, {"13": 2980.0, "14": 2397.6, "28": 7980.0, "30": 1500.0}, {}, {"14": 4299.52}, {"31": 3590.4}, {}], "ANA PAULA": [{"1": 4190.4, "20": 2988.0, "23": 960.8, "26": 2200.0, "27": 2397.6, "29": 4795.2, "31": 3790.4}, {"3": 3590.4, "19": 990.0}, {}, {}, {}, {}, {}, {}, {}], "LEANDRO PT": [{"16": 1900.0, "28": 2397.6}, {"1": 2980.0, "2": 2980.0, "5": 1000.0}, {"4": 1000.0, "30": 2397.6}, {"10": 3590.4, "19": 4190.4, "21": 3590.4, "23": 3590.4, "30": 2397.6}, {"4": 2397.6, "6": 2988.0, "20": 2397.6, "21": 2397.6}, {"16": 3590.4, "30": 4978.0}, {"11": 2397.6, "30": 8576.2, "31": 2397.6}, {"14": 1127.76, "15": 2397.6, "21": 2266.96, "31": 3590.4, "2": 2172.0}, {"7": 2364.56}], "LEANDRO B.": [{"22": 2988.0, "23": 5779.33, "31": 1990.0}, {"4": 4500.0, "5": 434.0, "10": 5383.79, "12": 6188.0, "13": 3590.4, "16": 500.0, "17": 1990.0, "18": 5380.59, "19": 3300.0, "21": 500.0, "23": 4190.4, "24": 2988.0, "26": 500.0}, {"2": 1795.2, "4": 1990.0, "5": 2397.6, "6": 990.0, "7": 4190.4, "9": 800.0, "10": 1795.2, "11": 1990.0, "17": 7775.2, "18": 4192.8, "19": 2988.0, "20": 4190.4, "25": 2397.6}, {"3": 1795.2, "6": 3700.0, "7": 1061.7, "9": 1096.14, "11": 2397.6, "14": 2480.0, "15": 4195.2, "18": 2945.2, "19": 2358.05, "21": 400.0, "22": 2988.0, "23": 2988.0, "26": 200.0, "29": 1795.2, "30": 5877.6}, {"2": 2397.6, "7": 790.0, "11": 5237.6, "13": 3590.4, "18": 2387.8, "20": 1750.0, "21": 2397.6, "22": 750.0, "23": 2397.6, "25": 2988.0, "26": 500.0, "27": 6390.7, "28": 2397.6}, {"2": 2988.0, "3": 11170.55, "4": 3387.6, "5": 2988.0, "7": 2397.6, "8": 7848.0, "9": 2397.6, "11": 1795.2, "13": 1910.4, "16": 4480.8, "17": 800.0, "27": 2194.8, "29": 6590.4, "30": 1402.4}, {"1": 2000.0, "3": 1798.32, "4": 2397.6, "6": 6329.4, "7": 602.4, "8": 795.3, "9": 1192.8, "10": 6375.6, "13": 2739.0, "14": 299.0, "15": 5785.2, "16": 553.62, "18": 800.0, "20": 1989.21, "23": 3197.6, "28": 4795.2, "30": 2198.6}, {"12": 6343.2, "13": 0.0, "14": 100.0, "17": 6147.96, "19": 1795.2, "20": 1192.8, "21": 5388.0, "23": 2988.0, "26": 500.0, "27": 2397.6, "4": 600.0, "8": 3590.4}, {"2": 1192.8, "3": 600.0, "4": 700.0, "5": 2397.6}], "TÚLIO": [{"23": 1000.0, "26": 8190.4, "28": 1500.0}, {"10": 2203.38, "19": 3523.3}, {"30": 3590.4}, {"16": 1795.2}, {"26": 2300.0, "30": 2397.6}, {"2": 1795.2, "4": 4795.2, "11": 1795.2, "12": 1600.0, "16": 2988.0, "18": 1795.2, "22": 299.93, "30": 3100.0}, {"3": 3590.4, "11": 4795.2, "15": 1000.0, "17": 4795.2, "20": 299.93, "22": 2397.6, "23": 1192.8, "29": 1795.2}, {"10": 6788.0, "12": 1192.8, "17": 5997.6, "25": 4795.2, "28": 3590.4}, {}], "MARCOS": [{}, {"11": 4190.4}, {}, {"7": 2299.14, "28": 990.0}, {}, {}, {}, {}, {}], "KARINA": [{}, {"23": 349.0}, {}, {}, {}, {}, {}, {}, {}], "ELLEN": [{}, {"26": 2795.2}, {"31": 2480.0}, {}, {}, {}, {}, {}, {}], "RAFAEL": [{}, {}, {"3": 1795.2, "5": 1900.0, "17": 4197.6}, {}, {}, {"8": 1192.8}, {"31": 1192.8}, {}, {"3": 1990.0, "6": 5146.2}], "BEATRIZ": [{}, {}, {"5": 3590.4, "10": 1190.19, "12": 2235.03, "14": 4413.08, "17": 3480.0, "20": 6585.6, "23": 3462.16, "25": 602.4, "26": 2397.6, "31": 5183.4}, {"1": 2988.0, "2": 2390.0, "7": 3212.47, "8": 2044.2, "10": 1990.0, "11": 1192.8, "13": 2988.0, "14": 2397.6, "15": 4588.0, "16": 2397.6, "17": 500.0, "22": 5350.4, "27": 2988.0, "29": 5975.0, "30": 14404.12}, {"4": 2397.6, "6": 1786.91, "8": 990.0, "11": 8243.52, "12": 2988.0, "13": 900.0, "14": 4075.2, "15": 700.0, "19": 1666.2, "20": 2988.0, "21": 1192.8, "23": 2397.6, "27": 1490.0, "28": 1795.2, "29": 4795.2, "31": 490.0}, {"1": 2480.0, "2": 2988.0, "3": 8800.0, "8": 2397.6, "9": 990.0, "10": 2988.0, "11": 3590.4, "12": 700.0, "13": 2980.0, "15": 3195.2, "17": 6630.8, "18": 5976.0, "19": 8461.6, "22": 602.4, "24": 4387.6, "26": 15757.29, "30": 7784.2}, {"1": 2397.6, "2": 6564.23, "6": 4590.4, "7": 2988.0, "8": 2989.75, "10": 2900.0, "14": 4795.2, "15": 500.0, "16": 5385.6, "17": 5695.2, "20": 7375.6, "24": 2182.8, "27": 2390.0, "30": 7333.15, "31": 6361.48}, {"11": 299.93, "12": 500.0, "13": 3988.0, "17": 5638.56, "18": 2789.41, "19": 4690.4, "20": 1548.0, "21": 2397.6, "22": 4764.49, "24": 1192.8, "28": 1990.0, "31": 588.0, "7": 2988.0}, {"5": 2299.14}], "JÚLIA": [{}, {}, {"10": 250.0, "12": 2980.0, "16": 1190.19, "17": 3590.4, "26": 2397.6, "27": 3000.0}, {"7": 2044.2, "8": 2980.0, "9": 3097.6, "10": 1131.99, "11": 1200.0, "14": 597.0, "15": 5960.0, "18": 1192.8, "22": 4190.4, "24": 2397.6, "27": 500.0, "30": 8505.56}, {"4": 2874.88, "8": 3970.0, "11": 2988.0, "14": 1197.0, "21": 1795.2, "25": 1776.72}, {"10": 2331.7}, {}, {}, {}], "LARISSA": [{}, {}, {"23": 2062.25}, {}, {}, {"26": 2390.4}, {}, {}, {}], "VINÍCIUS": [{}, {}, {}, {}, {"9": 990.0, "11": 1795.2, "14": 2364.56, "21": 3795.2, "25": 1192.8, "28": 990.0, "31": 2988.0}, {}, {}, {}, {}], "EDUARDO": [{}, {}, {}, {}, {"13": 1795.2}, {"15": 900.0}, {"31": 2595.2}, {"2": 1490.0}, {}], "VITOR": [{}, {}, {}, {}, {"13": 4180.8, "29": 8373.6, "30": 7783.2}, {"3": 8568.4, "6": 4695.37, "9": 3590.4, "10": 750.0, "13": 8373.6, "15": 2397.6, "18": 3590.4, "19": 3590.4, "22": 3397.6, "23": 2397.6, "26": 4783.2, "30": 3590.4}, {"6": 5190.4, "7": 2498.32, "8": 3207.6, "10": 4887.6, "15": 2397.6, "16": 7188.72, "17": 3590.4, "21": 1192.8, "22": 1673.42, "23": 5385.6, "29": 5437.8}, {"10": 4400.4, "11": 5795.2, "12": 2397.6, "13": 2973.87, "14": 990.0, "17": 2688.12, "20": 2988.0, "24": 7927.3, "26": 2795.2, "29": 2900.0, "31": 5385.6, "5": 1192.8, "7": 8973.6}, {"5": 2397.6}], "LUCCAS": [{}, {}, {}, {}, {"21": 4795.2}, {}, {}, {}, {}], "KASSIA INDICAÇÃO": [{}, {}, {}, {}, {"30": 2397.6}, {}, {"6": 1638.0}, {}, {}], "RODRIGO": [{}, {}, {}, {}, {}, {"2": 1000.0, "10": 2397.6, "12": 3590.4, "15": 1192.8, "18": 3590.4, "23": 2988.0}, {"9": 3590.4, "10": 3590.4, "17": 3590.4, "20": 2460.0, "22": 1795.2, "23": 4795.2, "27": 2988.0, "29": 2988.0, "31": 1795.2}, {"20": 3800.0, "28": 2331.7, "4": 1000.0}, {"3": 1000.0}], "CARIOCA": [{}, {}, {}, {}, {}, {"9": 5385.6, "11": 3590.4, "18": 3590.4}, {"8": 2980.0, "17": 3590.4, "23": 2988.0, "31": 3517.92}, {"10": 750.0, "13": 500.0, "14": 1697.36, "26": 1948.0, "28": 2397.6, "29": 2988.0, "31": 3842.0, "1": 500.0, "4": 2988.0}, {"1": 1990.0, "2": 3590.4, "3": 299.93}], "LARA": [{}, {}, {}, {}, {}, {}, {"9": 1795.2, "10": 1795.2, "17": 5135.6, "20": 2988.0, "21": 2988.0, "25": 3590.4, "27": 2168.76, "29": 1990.0, "30": 11124.6, "31": 5291.64}, {"10": 500.0, "11": 1795.2, "20": 4533.92, "7": 1795.2}, {"1": 1795.2}], "GUSTAVO": [{}, {}, {}, {}, {}, {}, {"17": 5976.0, "23": 7082.96, "28": 545.75, "31": 2462.0}, {"10": 4591.0, "14": 9665.0, "17": 14778.4, "20": 3590.4, "24": 1192.8, "25": 2988.0, "27": 4385.2, "28": 5988.0, "29": 5580.4, "6": 4971.52}, {"3": 299.93, "5": 2988.0}], "LUIGI": [{}, {}, {}, {}, {}, {}, {"17": 2397.6}, {}, {}], "IASMIN": [{}, {}, {}, {}, {}, {}, {}, {"11": 4786.32, "13": 1795.2, "17": 903.6, "20": 2988.0, "21": 4783.2, "24": 2988.0, "25": 3741.8, "28": 4423.04, "29": 4190.4, "31": 1626.3, "5": 545.75}, {"7": 3346.91}], "MISAEL": [{}, {}, {}, {}, {}, {}, {}, {"13": 500.0}, {}], "PAULO": [{}, {}, {}, {}, {}, {}, {}, {"31": 1990.0}, {}]}, "diarioTotal": [{"1": 24396.87, "13": 2388.0, "14": 8082.2, "15": 1158.0, "16": 1900.0, "18": 434.0, "19": 2988.0, "20": 3988.0, "21": 4602.0, "22": 4978.0, "23": 7740.13, "25": 4936.8, "26": 10390.4, "27": 4795.2, "28": 6885.6, "29": 13333.2, "30": 633.99, "31": 7582.4}, {"1": 2980.0, "2": 3563.9, "3": 4472.6, "4": 15319.6, "5": 2934.0, "6": 2220.75, "9": 3743.0, "10": 12397.57, "11": 6588.0, "12": 9585.6, "13": 6385.6, "16": 2729.2, "17": 1990.0, "18": 7175.79, "19": 17036.6, "20": 3590.4, "21": 500.0, "23": 11497.4, "24": 8373.6, "25": 3999.6, "26": 8918.0, "28": 1067.99}, {"2": 2095.1, "3": 7180.8, "4": 5387.6, "5": 8322.0, "6": 4377.6, "7": 4190.4, "9": 3050.0, "10": 7882.99, "11": 8578.0, "12": 15401.43, "13": 5988.0, "14": 4413.08, "16": 2928.19, "17": 19911.2, "18": 5988.0, "19": 9090.8, "20": 16362.61, "23": 10033.61, "24": 1990.0, "25": 5390.4, "26": 5217.8, "27": 3000.0, "28": 954.05, "30": 6638.0, "31": 12101.0}, {"1": 2988.0, "2": 12188.06, "3": 1895.2, "6": 3700.0, "7": 11032.71, "8": 10945.65, "9": 8199.34, "10": 20324.89, "11": 7488.0, "12": 420.0, "13": 5976.0, "14": 13417.36, "15": 25227.07, "16": 11864.03, "17": 7078.4, "18": 4138.0, "19": 6548.45, "20": 3588.0, "21": 5428.61, "22": 14178.56, "23": 6578.4, "24": 2987.6, "25": 1000.0, "26": 200.0, "27": 5705.8, "28": 2182.8, "29": 22824.64, "30": 43066.48}, {"1": 2201.2, "2": 4995.19, "4": 7670.08, "5": 3588.0, "6": 7762.91, "7": 2080.0, "8": 5866.0, "9": 1980.0, "10": 2980.0, "11": 25173.82, "12": 14487.9, "13": 15879.2, "14": 14431.96, "15": 9472.76, "16": 5214.2, "18": 15845.8, "19": 16339.4, "20": 14666.4, "21": 19080.4, "22": 3750.0, "23": 5495.2, "25": 5957.52, "26": 6995.0, "27": 16204.1, "28": 23448.05, "29": 25218.14, "30": 17283.76, "31": 8532.16}, {"1": 2480.0, "2": 12092.0, "3": 35514.95, "4": 9141.8, "5": 5228.0, "6": 9978.57, "7": 2397.6, "8": 17607.0, "9": 20297.52, "10": 10864.9, "11": 19526.4, "12": 9786.2, "13": 13264.0, "15": 13065.8, "16": 15672.2, "17": 13352.9, "18": 22556.71, "19": 20223.9, "22": 7833.3, "23": 12483.93, "24": 11449.56, "25": 14556.6, "26": 35516.01, "27": 2694.8, "28": 1798.32, "29": 17259.49, "30": 29251.8}, {"1": 10785.2, "2": 9217.42, "3": 11951.12, "4": 2397.6, "6": 23531.4, "7": 12973.12, "8": 10884.65, "9": 13660.5, "10": 22928.73, "11": 7192.8, "13": 3038.93, "14": 9393.72, "15": 14273.2, "16": 16115.94, "17": 36260.8, "18": 800.0, "20": 15992.75, "21": 4180.8, "22": 5866.22, "23": 27946.26, "24": 17200.06, "25": 3590.4, "27": 8739.56, "28": 11510.35, "29": 21099.0, "30": 29232.55, "31": 33897.04}, {"10": 18879.41, "11": 12676.65, "12": 10933.6, "13": 10757.07, "14": 14772.92, "15": 2397.6, "17": 40740.59, "18": 2789.41, "19": 7073.6, "20": 28419.45, "21": 23582.2, "22": 4764.49, "23": 2988.0, "24": 13800.9, "25": 16317.8, "26": 10381.6, "27": 6782.8, "28": 25331.14, "29": 15658.8, "31": 34879.02, "1": 700.0, "2": 3861.99, "3": 3097.0, "4": 4588.0, "5": 4436.08, "6": 5761.52, "7": 17736.8, "8": 3590.4}, {"1": 6595.8, "2": 4783.2, "3": 4189.86, "4": 700.0, "5": 10082.34, "6": 5146.2, "7": 5711.47}], "reembolsoCloser": {"TÚLIO": [{"1": 1}, {"2": 1, "21": 1}, {}, {"27": 1}, {"23": 1}, {"5": 1, "8": 1}, {"28": 1}, {"10": 2}, {}], "LUCCAS": [{"16": 1}, {}, {"12": 1}, {"7": 1}, {"28": 2, "30": 1}, {"2": 1}, {}, {}, {}], "LEANDRO PT": [{"28": 1}, {"9": 1, "20": 2}, {"7": 1, "24": 1}, {"10": 1, "23": 1}, {"28": 1}, {}, {"17": 1}, {"3": 1}, {}], "MARCOS": [{}, {"11": 1}, {"10": 1}, {}, {"1": 1, "7": 1, "20": 1}, {}, {}, {}, {}], "LARISSA": [{}, {}, {"13": 1}, {"28": 1, "29": 2}, {"27": 1}, {"9": 1}, {"27": 2, "28": 1, "30": 1}, {}, {}], "RAFAEL": [{}, {}, {"17": 1}, {}, {"13": 1}, {}, {}, {}, {}], "GRAZI": [{}, {}, {}, {"24": 1}, {}, {}, {}, {}, {}], "EDUARDO": [{}, {}, {}, {}, {"14": 1, "21": 1}, {}, {"28": 1, "30": 1}, {}, {}], "LUIGI": [{}, {}, {}, {}, {}, {}, {"16": 1, "31": 1}, {"13": 1, "17": 1, "26": 1}, {}], "ALVARO": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "AUTOMÁTICO": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "KARINA": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "MARRAZZO": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "MISAEL": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "NATHAN": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "PAULO": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "RODRIGO": [{}, {}, {}, {}, {}, {}, {}, {}, {}]}, "reembolsoSDR": {"MICHELLY": [{"1": 1}, {"2": 1, "11": 1, "20": 1, "21": 1}, {"10": 1, "13": 1, "17": 1, "24": 1}, {"7": 1, "23": 1, "29": 2}, {"13": 1, "14": 1, "21": 1, "23": 1, "28": 1, "30": 1}, {"9": 1}, {"17": 1, "27": 1, "28": 2, "30": 1}, {"3": 1}, {}], "SEM SDR": [{"16": 1}, {}, {}, {}, {"20": 1}, {}, {}, {}, {}], "ANA PAULA": [{"28": 1}, {}, {}, {}, {}, {}, {}, {}, {}], "LEANDRO PT": [{}, {"9": 1}, {}, {}, {}, {}, {}, {}, {}], "LEANDRO B.": [{}, {"20": 1}, {}, {"10": 1, "28": 1}, {}, {"5": 1, "8": 1}, {}, {"13": 1}, {}], "BEATRIZ": [{}, {}, {"7": 1}, {"24": 1}, {"27": 1}, {"2": 1}, {}, {}, {}], "RENOVAÇÃO": [{}, {}, {"12": 1}, {}, {}, {}, {}, {}, {}], "JÚLIA": [{}, {}, {}, {"27": 1}, {"7": 1}, {}, {}, {}, {}], "MARCOS": [{}, {}, {}, {}, {"1": 1}, {}, {}, {}, {}], "VINÍCIUS": [{}, {}, {}, {}, {"28": 2}, {}, {}, {}, {}], "LARA": [{}, {}, {}, {}, {}, {}, {"16": 1, "27": 1}, {}, {}], "VITOR": [{}, {}, {}, {}, {}, {}, {"28": 1, "30": 1}, {}, {}], "CARIOCA": [{}, {}, {}, {}, {}, {}, {"31": 1}, {"26": 1}, {}], "GUSTAVO": [{}, {}, {}, {}, {}, {}, {}, {"10": 2}, {}], "IASMIN": [{}, {}, {}, {}, {}, {}, {}, {"17": 1}, {}], "EDUARDO": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "ELLEN": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "KARINA": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "KASSIA INDICAÇÃO": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "LARISSA": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "LUCCAS": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "LUIGI": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "MISAEL": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "RAFAEL": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "RODRIGO": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "TÚLIO": [{}, {}, {}, {}, {}, {}, {}, {}, {}], "PAULO": [{}, {}, {}, {}, {}, {}, {}, {}, {}]}};
+
+const $ = id => document.getElementById(id);
+const fmtMoeda = n => 'R$ ' + n.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+const fmtNum = n => n.toLocaleString('pt-BR');
+// remove acentos para permitir buscar "tulio" e encontrar "TÚLIO"
+const normaliza = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const CORES_MEDALHA = ['var(--ouro)','var(--prata)','var(--bronze)'];
+const NOMES_MES = {janeiro:1,fevereiro:2,março:3,marco:3,abril:4,maio:5,junho:6,julho:7,agosto:8,setembro:9,outubro:10,novembro:11,dezembro:12};
+
+function parseMesLabel(label){
+  // "Agosto/26" -> {ano:2026, mes:8}
+  const [nome, anoCurto] = label.split('/');
+  const mes = NOMES_MES[nome.toLowerCase()];
+  const ano = 2000 + parseInt(anoCurto, 10);
+  return { ano, mes };
+}
+function ultimoDiaDoMes(ano, mes){ return new Date(ano, mes, 0).getDate(); }
+
+// Estado: quais meses estão selecionados + filtro de dias (aplicado dentro de cada mês selecionado)
+const st = { meses: new Set(DADOS.meses.map((_,i)=>i)), diaIni: 1, diaFim: 31 };
+
+// ── Monta os toggles de mês ──
+function montaToggles(){
+  const cont = $('toggleMeses');
+  DADOS.meses.forEach((m,i)=>{
+    const b=document.createElement('button');
+    b.type='button'; b.className='chip-mes'+(st.meses.has(i)?' ativo':'');
+    b.textContent=m;
+    b.addEventListener('click',()=>{
+      if(st.meses.has(i)){
+        if(st.meses.size>1) st.meses.delete(i); // sempre ao menos 1 mês selecionado
+      } else {
+        st.meses.add(i);
+      }
+      b.classList.toggle('ativo', st.meses.has(i));
+      atualizaLimitesDias();
+      render();
+    });
+    cont.appendChild(b);
+  });
+}
+
+$('limpar').addEventListener('click', ()=>{
+  st.meses = new Set(DADOS.meses.map((_,i)=>i));
+  document.querySelectorAll('.chip-mes').forEach(c=>c.classList.add('ativo'));
+  atualizaLimitesDias();
+  render();
+});
+
+// ── Filtro de dias: recolhido por padrão, só aparece quando a pessoa clica em
+// "Filtrar por dia". Usa inputs de calendário nativos, limitados ao mês de
+// referência (o primeiro mês marcado no filtro de período). ──
+function boundsMesReferenciaSelecionado(){
+  const idx = [...st.meses].sort((a,b)=>a-b)[0];
+  const {ano, mes} = parseMesLabel(DADOS.meses[idx]);
+  return { ano, mes, diasNoMes: ultimoDiaDoMes(ano, mes) };
+}
+function isoDate(ano,mes,dia){ return `${ano}-${String(mes).padStart(2,'0')}-${String(dia).padStart(2,'0')}`; }
+
+function montaFiltroDias(){
+  const inputIni = $('diaIniCal'), inputFim = $('diaFimCal');
+  const botaoToggle = $('toggleFiltroDias'), painel = $('painelDias'), botaoLimpar = $('limparDias');
+
+  function atualizaLimites(){
+    const { ano, mes, diasNoMes } = boundsMesReferenciaSelecionado();
+    const min = isoDate(ano,mes,1), max = isoDate(ano,mes,diasNoMes);
+    inputIni.min = min; inputIni.max = max;
+    inputFim.min = min; inputFim.max = max;
+    inputIni.value = isoDate(ano, mes, Math.min(st.diaIni, diasNoMes));
+    inputFim.value = isoDate(ano, mes, Math.min(st.diaFim, diasNoMes));
+  }
+  atualizaLimitesDias = atualizaLimites; // exposto para montaToggles/limpar atualizarem o calendário
+
+  function atualizaRotuloToggle(){
+    const filtrado = !(st.diaIni===1 && st.diaFim===31);
+    botaoToggle.classList.toggle('ativo', filtrado);
+    botaoToggle.textContent = filtrado ? `📅 Dias ${st.diaIni}–${st.diaFim}` : '📅 Filtrar por dia';
+  }
+  atualizaRotuloToggleFn = atualizaRotuloToggle;
+
+  botaoToggle.addEventListener('click', ()=>{
+    const abrindo = painel.hidden;
+    painel.hidden = !painel.hidden;
+    if(abrindo) atualizaLimites();
+  });
+
+  inputIni.addEventListener('change', ()=>{
+    if(!inputIni.value) return;
+    st.diaIni = new Date(inputIni.value+'T00:00:00').getDate();
+    if(st.diaIni>st.diaFim){ st.diaFim = st.diaIni; }
+    atualizaLimites();
+    atualizaRotuloToggle();
+    render();
+  });
+  inputFim.addEventListener('change', ()=>{
+    if(!inputFim.value) return;
+    st.diaFim = new Date(inputFim.value+'T00:00:00').getDate();
+    if(st.diaFim<st.diaIni){ st.diaIni = st.diaFim; }
+    atualizaLimites();
+    atualizaRotuloToggle();
+    render();
+  });
+  botaoLimpar.addEventListener('click', ()=>{
+    st.diaIni = 1; st.diaFim = 31;
+    atualizaLimites();
+    atualizaRotuloToggle();
+    render();
+  });
+
+  atualizaLimites();
+  atualizaRotuloToggle();
+}
+let atualizaLimitesDias = ()=>{};
+let atualizaRotuloToggleFn = ()=>{};
+
+// ── Soma o valor de uma pessoa dentro do recorte atual (meses + dias) ──
+function totalPessoa(nome, mapaDiario){
+  const porMes = mapaDiario[nome];
+  if(!porMes) return 0;
+  let t=0;
+  st.meses.forEach(idx=>{
+    const dias = porMes[idx];
+    if(!dias) return;
+    for(const diaStr in dias){
+      const dia = +diaStr;
+      if(dia>=st.diaIni && dia<=st.diaFim) t += dias[diaStr];
+    }
+  });
+  return t;
+}
+
+// ── Soma o valor de uma equipe inteira dentro do recorte atual ──
+function totalEquipe(lista, mapaDiario){
+  return lista.reduce((s,nome)=> s + totalPessoa(nome, mapaDiario), 0);
+}
+
+// ── Meta do período: sempre o mês inteiro, não é afetada pelo filtro de dias ──
+function metaPeriodo(){
+  let t=0;
+  st.meses.forEach(i=> t += DADOS.metas[i]);
+  return t;
+}
+
+// ── Estrutura de times (a partir de setembro/26) ──
+// Chaves batem com DADOS.closers / DADOS.sdrs; "apelido" é o nome usado nas conversas do time.
+const PESSOAS_CLOSER = {
+  'LEANDRO PT': { apelido:'Portuga', time:'A', categoria:'senior', meta:85000, lider:true },
+  'PAULO':      { apelido:'Paulo',   time:'A', categoria:'junior', meta:50000 },
+  'TÚLIO':      { apelido:'Túlio',   time:'A', categoria:'pleno',  meta:65000 },
+  'LUIGI':      { apelido:'Luigi',   time:'A', categoria:'junior', meta:50000 },
+  'EDUARDO':    { apelido:'Edu',     time:'B', categoria:'senior', meta:85000, lider:true },
+  'LARISSA':    { apelido:'Larissa', time:'B', categoria:'pleno',  meta:65000 },
+  'RODRIGO':    { apelido:'Rodrigo', time:'B', categoria:'junior', meta:50000 },
+  'MISAEL':     { apelido:'Misael',  time:'B', categoria:'junior', meta:50000 },
+};
+const PESSOAS_SDR = {
+  'RAFAEL':      { apelido:'Rafael',   time:'1', categoria:'senior', meta:85000, lider:true },
+  'BEATRIZ':     { apelido:'Beatriz',  time:'1', categoria:'pleno',  meta:65000 },
+  'VITOR':       { apelido:'Vitor',    time:'1', categoria:'junior', meta:50000 },
+  'CARIOCA':     { apelido:'Carioca',  time:'1', categoria:'junior', meta:50000 },
+  'MICHELLY':    { apelido:'Michelly', time:'2', categoria:'senior', meta:85000, lider:true },
+  'LEANDRO B.':  { apelido:'Leandro',  time:'2', categoria:'pleno',  meta:65000 },
+  'GUSTAVO':     { apelido:'Gustavo',  time:'2', categoria:'junior', meta:50000 },
+  'IASMIN':      { apelido:'Iasmin',   time:'2', categoria:'junior', meta:50000 },
+};
+const TIMES_CLOSER = {
+  A: { nome:'Time A', badge:'tA', membros:['LEANDRO PT','PAULO','TÚLIO','LUIGI'] },
+  B: { nome:'Time B', badge:'tB', membros:['EDUARDO','LARISSA','RODRIGO','MISAEL'] },
+};
+const TIMES_SDR = {
+  '1': { nome:'Time 1', badge:'t1', membros:['RAFAEL','BEATRIZ','VITOR','CARIOCA'] },
+  '2': { nome:'Time 2', badge:'t2', membros:['MICHELLY','LEANDRO B.','GUSTAVO','IASMIN'] },
+};
+const CATEGORIA_LABEL = { senior:'Sênior', pleno:'Pleno', junior:'Júnior' };
+const CATEGORIA_ORDEM = ['senior','pleno','junior'];
+
+// ── Quantidade de dias "decorridos" (já ocorridos) dentro de um mês, considerando
+// a data de atualização para o mês corrente e o mês completo para meses já fechados ──
+function diasElapsedNoMes(idx){
+  const {ano, mes} = parseMesLabel(DADOS.meses[idx]);
+  const diasNoMes = ultimoDiaDoMes(ano, mes);
+  const inputVal = $('dataAtualizacao').value;
+  if(inputVal){
+    const [aY, aM, aD] = inputVal.split('-').map(Number);
+    if(ano===aY && mes===aM) return Math.min(Math.max(aD,1), diasNoMes); // mês corrente: só até hoje
+    if(ano>aY || (ano===aY && mes>aM)) return 0; // mês ainda no futuro
+  }
+  return diasNoMes; // mês já fechado (passado): conta inteiro
+}
+
+// ── Quantidade de dias efetivamente contados no filtro atual (para a média diária) —
+// conta dias corridos (mesmo sem venda), nunca dias futuros que ainda não aconteceram ──
+function diasNoFiltro(){
+  let n=0;
+  st.meses.forEach(idx=>{
+    const elapsed = diasElapsedNoMes(idx);
+    const ini = Math.max(st.diaIni, 1);
+    const fim = Math.min(st.diaFim, elapsed);
+    if(fim>=ini) n += (fim-ini+1);
+  });
+  return n;
+}
+
+function rankingEquipe(lista, mapaDiario){
+  return lista.map(nome=>[nome, totalPessoa(nome, mapaDiario)]).sort((a,b)=>b[1]-a[1]);
+}
+
+// ── Ritmo do mês em foco (dias restantes / necessário por dia) ──
+// O "mês em foco" é o mais recente entre os marcados no filtro de período —
+// ex.: se só Julho está marcado, o ritmo é calculado sobre Julho (mês fechado).
+// A "data de atualização" continua sendo só a referência do que é "hoje".
+function mesFocoAtual(){
+  if(!st.meses.size) return -1;
+  return [...st.meses].sort((a,b)=>b-a)[0];
+}
+function hojeInfo(){
+  const inputVal = $('dataAtualizacao').value;
+  if(!inputVal) return null;
+  const [ano, mes, dia] = inputVal.split('-').map(Number);
+  return { ano, mes, dia };
+}
+function compararMes(anoA,mesA, anoB,mesB){
+  if(anoA!==anoB) return anoA-anoB;
+  return mesA-mesB;
+}
+
+function calcRitmo(){
+  const hoje = hojeInfo();
+  if(!hoje) return null;
+  const idx = mesFocoAtual();
+  if(idx === -1) return null;
+
+  const { ano, mes } = parseMesLabel(DADOS.meses[idx]);
+  const diasNoMes = ultimoDiaDoMes(ano, mes);
+  const cmp = compararMes(ano, mes, hoje.ano, hoje.mes);
+
+  const totalMes = DADOS.closers.reduce((s,n)=>{
+    const dias = (DADOS.diarioCloser[n]||[])[idx] || {};
+    return s + Object.values(dias).reduce((a,b)=>a+b,0);
+  },0);
+  const metaMes = DADOS.metas[idx];
+  const faltaMes = metaMes - totalMes;
+
+  if(cmp === 0){
+    // mês corrente: ainda em andamento
+    const diasDecorridos = Math.min(Math.max(hoje.dia,1), diasNoMes);
+    const diasRestantes = diasNoMes - diasDecorridos + 1; // inclusive hoje
+    const necessarioPorDia = faltaMes > 0.01 ? faltaMes/diasRestantes : 0;
+    return { status:'corrente', idx, mesLabel:DADOS.meses[idx], diasNoMes, diasDecorridos, diasRestantes, totalMes, metaMes, faltaMes, necessarioPorDia };
+  }
+  if(cmp < 0){
+    // mês fechado: já passou por completo
+    return { status:'fechado', idx, mesLabel:DADOS.meses[idx], diasNoMes, totalMes, metaMes, faltaMes };
+  }
+  // mês futuro (fora dos dados ainda)
+  return { status:'futuro', idx, mesLabel:DADOS.meses[idx], diasNoMes, totalMes, metaMes, faltaMes };
+}
+
+// ── Quanto fizemos ontem (mês corrente) / Último dia registrado (mês fechado) ──
+function calcOntem(){
+  const r = calcRitmo();
+  if(!r) return null;
+
+  if(r.status === 'corrente'){
+    const hoje = hojeInfo();
+    const dataRef = new Date(hoje.ano, hoje.mes-1, hoje.dia);
+    const ontem = new Date(dataRef);
+    ontem.setDate(ontem.getDate()-1);
+    const anoOntem = ontem.getFullYear(), mesOntem = ontem.getMonth()+1, diaOntem = ontem.getDate();
+
+    const idx = DADOS.meses.findIndex(label=>{
+      const p = parseMesLabel(label);
+      return p.ano===anoOntem && p.mes===mesOntem;
+    });
+    if(idx === -1) return { semReferencia:true, status:'corrente' };
+
+    const valor = DADOS.diarioTotal[idx] ? DADOS.diarioTotal[idx][String(diaOntem)] : undefined;
+    if(valor === undefined) return { semDado:true, dia:diaOntem, mesLabel: DADOS.meses[idx], status:'corrente' };
+
+    return { idx, mesLabel: DADOS.meses[idx], dia: diaOntem, valor, status:'corrente' };
+  }
+
+  if(r.status === 'fechado'){
+    // Mês já fechado: mostra o último dia com venda registrada nele, não "ontem"
+    const dias = Object.keys(DADOS.diarioTotal[r.idx] || {}).map(Number);
+    if(!dias.length) return { semDado:true, mesLabel:r.mesLabel, status:'fechado' };
+    const ultimoDia = Math.max(...dias);
+    const valor = DADOS.diarioTotal[r.idx][String(ultimoDia)];
+    return { idx:r.idx, mesLabel:r.mesLabel, dia:ultimoDia, valor, status:'fechado' };
+  }
+
+  return { semReferencia:true, status:r.status };
+}
+
+// ── Slats (barras de ranking com posição) — cada linha guarda o nome em
+// minúsculo em data-nome para permitir filtrar por busca sem recalcular posições ──
+function slats(el, pares, formatador){
+  el.innerHTML='';
+  formatador = formatador || fmtMoeda;
+  if(!pares.length || pares.every(p=>p[1]===0)){ el.innerHTML='<div class="vazio">Sem dados para o período selecionado.</div>'; return; }
+  const max = pares[0][1] || 1;
+  pares.forEach(([nome,v],i)=>{
+    const row=document.createElement('div');
+    row.className='slat-row'+(i<3?' top'+(i+1):'');
+    row.dataset.nome = normaliza(nome);
+    row.innerHTML = `<div class="slat-nome" title="${nome}"><span class="rank-pos">${i+1}º</span> ${nome}</div>
+      <div class="slat-trilho"><div class="slat-barra" style="width:${(v/max*100).toFixed(1)}%"></div></div>
+      <div class="slat-num">${formatador(v)}</div>`;
+    el.appendChild(row);
+  });
+}
+
+// ── Desempenho por Time (Closers: A/B · SDRs: 1/2) ──
+// Meta de cada time = metade da meta do período selecionado (mesma lógica da meta geral,
+// que já soma os meses marcados no filtro).
+function renderTimeCard(container, timeKey, timeInfo, mapaDiario, metaTime){
+  const membros = timeInfo.membros;
+  const total = totalEquipe(membros, mapaDiario);
+  const pct = metaTime>0 ? (total/metaTime*100) : 0;
+  const falta = metaTime - total;
+
+  const linhaMembros = membros
+    .map(chave => {
+      const info = (mapaDiario===DADOS.diarioCloser ? PESSOAS_CLOSER : PESSOAS_SDR)[chave];
+      const v = totalPessoa(chave, mapaDiario);
+      return { info, v };
+    })
+    .sort((a,b)=>b.v-a.v)
+    .map(({info,v}) => `<div class="team-card-membro">
+        <span class="m-nome">${info.apelido}${info.lider?' <span class="lider-tag">★ líder</span>':''} <span class="cat-badge ${info.categoria}">${CATEGORIA_LABEL[info.categoria]}</span></span>
+        <span class="m-valor">${fmtMoeda(v)}</span>
+      </div>`).join('');
+
+  const div = document.createElement('div');
+  div.className = 'team-card';
+  div.innerHTML = `
+    <div class="team-card-header">
+      <span class="team-card-nome">${timeInfo.nome} <span class="time-badge ${timeInfo.badge}">${timeInfo.nome.toUpperCase()}</span></span>
+    </div>
+    <div class="team-card-nums">
+      <span class="team-card-total">${fmtMoeda(total)}</span>
+      <span class="team-card-meta">de ${fmtMoeda(metaTime)}</span>
+    </div>
+    <div class="team-card-trilho"><div class="team-card-barra" style="width:${Math.min(pct,100).toFixed(1)}%;${pct>=100?'background:var(--verde-2)':''}"></div></div>
+    <div class="team-card-pct">${pct.toFixed(1)}% da meta ${falta>0.01 ? '· faltam '+fmtMoeda(falta) : '· superada em '+fmtMoeda(-falta)}</div>
+    <div class="team-card-membros">${linhaMembros}</div>
+  `;
+  container.appendChild(div);
+}
+
+function renderTimes(){
+  const meta = metaPeriodo();
+  const metaTime = meta / 2;
+  $('timesSub').textContent = `meta de cada time = metade da meta do período selecionado (${fmtMoeda(metaTime)})`;
+
+  const contCloser = $('gTimesCloser'); contCloser.innerHTML = '';
+  Object.entries(TIMES_CLOSER).forEach(([k,info]) => renderTimeCard(contCloser, k, info, DADOS.diarioCloser, metaTime));
+
+  const contSdr = $('gTimesSdr'); contSdr.innerHTML = '';
+  Object.entries(TIMES_SDR).forEach(([k,info]) => renderTimeCard(contSdr, k, info, DADOS.diarioSDR, metaTime));
+}
+
+// ── Atingimento individual (meta mensal por categoria × nº de meses selecionados) ──
+function renderIndividualBloco(container, pessoas, mapaDiario){
+  container.innerHTML = '';
+  const nMeses = Math.max(st.meses.size, 1);
+
+  CATEGORIA_ORDEM.forEach(cat => {
+    const doCat = Object.entries(pessoas).filter(([,info]) => info.categoria === cat);
+    if(!doCat.length) return;
+
+    const heading = document.createElement('div');
+    heading.className = 'categoria-heading';
+    heading.innerHTML = `<span class="legenda-dot ${cat}"></span>${CATEGORIA_LABEL[cat]} — meta ${fmtMoeda(doCat[0][1].meta)}/mês`;
+    container.appendChild(heading);
+
+    const lista = document.createElement('div');
+    lista.className = 'individual-list';
+
+    doCat
+      .map(([chave, info]) => ({ chave, info, valor: totalPessoa(chave, mapaDiario) }))
+      .sort((a,b)=>b.valor-a.valor)
+      .forEach(({chave, info, valor}) => {
+        const metaIndiv = info.meta * nMeses;
+        const pct = metaIndiv>0 ? (valor/metaIndiv*100) : 0;
+        const bateu = pct >= 100;
+        const row = document.createElement('div');
+        row.className = 'individual-row';
+        row.innerHTML = `
+          <div class="individual-row-topo">
+            <span class="individual-nome">${info.apelido}${info.lider?' <span class="lider-tag">★</span>':''} <span class="time-badge ${TIMES_CLOSER[info.time]?TIMES_CLOSER[info.time].badge:TIMES_SDR[info.time].badge}">${TIMES_CLOSER[info.time]?TIMES_CLOSER[info.time].nome:TIMES_SDR[info.time].nome}</span></span>
+            <span class="individual-num"><strong>${fmtMoeda(valor)}</strong> / ${fmtMoeda(metaIndiv)} · ${pct.toFixed(1)}%</span>
+          </div>
+          <div class="individual-bar-trilho"><div class="individual-bar ${bateu?'bateu':cat}" style="width:${Math.min(pct,100).toFixed(1)}%"></div></div>
+        `;
+        lista.appendChild(row);
+      });
+
+    container.appendChild(lista);
+  });
+}
+
+function renderIndividual(){
+  const nMeses = Math.max(st.meses.size, 1);
+  $('individualSub').textContent = `meta mensal por categoria × ${nMeses} mês${nMeses>1?'es':''} selecionado${nMeses>1?'s':''}`;
+  renderIndividualBloco($('gIndividualCloser'), PESSOAS_CLOSER, DADOS.diarioCloser);
+  renderIndividualBloco($('gIndividualSdr'), PESSOAS_SDR, DADOS.diarioSDR);
+}
+
+// ── Busca por nome dentro de um ranking (filtra sem recalcular posição) ──
+function ligaBusca(inputId, limparId, elId, infoId){
+  const input = $(inputId), botaoLimpar = $(limparId), el = $(elId), info = $(infoId);
+  let totalPessoas = 0;
+  function aplica(){
+    const termo = normaliza(input.value.trim());
+    botaoLimpar.classList.toggle('visivel', termo.length>0);
+    let visiveis = 0;
+    el.querySelectorAll('.slat-row').forEach(row=>{
+      const bate = !termo || row.dataset.nome.includes(termo);
+      row.style.display = bate ? '' : 'none';
+      if(bate) visiveis++;
+    });
+    info.textContent = termo ? `Mostrando ${visiveis} de ${totalPessoas}` : '';
+  }
+  input.addEventListener('input', aplica);
+  botaoLimpar.addEventListener('click', ()=>{ input.value=''; aplica(); input.focus(); });
+  return { aplica, setTotal(n){ totalPessoas = n; } };
+}
+const buscaCloser = ligaBusca('buscaCloser','limpaBuscaCloser','gCloser','infoCloser');
+const buscaSdr = ligaBusca('buscaSdr','limpaBuscaSdr','gSdr','infoSdr');
+
+// ── Divergência Closer x SDR por mês, dentro do recorte de dias atual ──
+function calcDivergencias(){
+  const divergentes = [];
+  [...st.meses].sort().forEach(i=>{
+    const totC = DADOS.closers.reduce((s,n)=>{
+      const dias = (DADOS.diarioCloser[n]||[])[i] || {};
+      let sub=0;
+      for(const d in dias){ if(+d>=st.diaIni && +d<=st.diaFim) sub+=dias[d]; }
+      return s+sub;
+    },0);
+    const totS = DADOS.sdrs.reduce((s,n)=>{
+      const dias = (DADOS.diarioSDR[n]||[])[i] || {};
+      let sub=0;
+      for(const d in dias){ if(+d>=st.diaIni && +d<=st.diaFim) sub+=dias[d]; }
+      return s+sub;
+    },0);
+    const diff = totC - totS;
+    if(Math.abs(diff) > 0.01) divergentes.push({ mes: DADOS.meses[i], totC, totS, diff });
+  });
+  return divergentes;
+}
+
+// ── Render geral ──
+function render(){
+  const nMeses = st.meses.size;
+  const filtroDiasTexto = (st.diaIni===1 && st.diaFim===31) ? '' : ` · dias ${st.diaIni}–${st.diaFim}`;
+  $('contagem').innerHTML = `<strong>${nMeses}</strong> mês${nMeses>1?'es':''} selecionado${nMeses>1?'s':''} · ${[...st.meses].sort().map(i=>DADOS.meses[i]).join(', ')}${filtroDiasTexto}`;
+
+  const rankCloser = rankingEquipe(DADOS.closers, DADOS.diarioCloser).filter(([,v])=>v>0);
+  const rankSdr = rankingEquipe(DADOS.sdrs, DADOS.diarioSDR).filter(([,v])=>v>0);
+  const totCloser = rankCloser.reduce((s,[,v])=>s+v,0);
+  const meta = metaPeriodo();
+  const falta = meta - totCloser;
+
+  $('kMeta').textContent = fmtMoeda(meta);
+  $('kMetaDet').textContent = [...st.meses].sort().map(i=>DADOS.meses[i]).join(' + ');
+  $('kTotal').textContent = fmtMoeda(totCloser);
+  $('kTotalDet').textContent = (meta ? `${(totCloser/meta*100).toFixed(1)}% da meta` : '—') + filtroDiasTexto;
+  if(falta > 0.01){
+    $('kFalta').textContent = fmtMoeda(falta);
+    $('kFaltaDet').textContent = 'para atingir 100% da meta';
+  } else {
+    $('kFalta').textContent = fmtMoeda(0);
+    $('kFaltaDet').textContent = `meta superada em ${fmtMoeda(-falta)}`;
+  }
+  $('kAtg').textContent = meta ? (totCloser/meta*100).toFixed(1)+'%' : '—';
+
+  const nDias = diasNoFiltro();
+  $('kMediaFiltro').textContent = nDias ? fmtMoeda(totCloser/nDias) + '/dia' : '—';
+  $('kMediaFiltroDet').textContent = nDias ? `${nDias} dia${nDias>1?'s':''} corrido${nDias>1?'s':''} no recorte atual` : 'sem dias no recorte atual';
+
+  slats($('gCloser'), rankCloser);
+  slats($('gSdr'), rankSdr);
+  buscaCloser.setTotal(rankCloser.length);
+  buscaSdr.setTotal(rankSdr.length);
+  buscaCloser.aplica();
+  buscaSdr.aplica();
+
+  // ── Reembolsos, respeitando o mesmo recorte de meses + dias ──
+  const rankReembCloser = rankingEquipe(DADOS.closers, DADOS.reembolsoCloser).filter(([,v])=>v>0);
+  const rankReembSdr = rankingEquipe(DADOS.sdrs, DADOS.reembolsoSDR).filter(([,v])=>v>0);
+  const totReembolsos = rankReembCloser.reduce((s,[,v])=>s+v,0);
+  const fmtContagem = v => `${v} pedido${v!==1?'s':''}`;
+  $('reembolsosSub').textContent = `${totReembolsos} pedido${totReembolsos!==1?'s':''} pago${totReembolsos!==1?'s':''} e cancelado${totReembolsos!==1?'s':''} em até 7 dias, no período selecionado — não entram no total vendido`;
+  slats($('gReembolsoCloser'), rankReembCloser, fmtContagem);
+  slats($('gReembolsoSdr'), rankReembSdr, fmtContagem);
+
+  // Alerta de divergência entre total de Closers e total de SDRs por mês
+  const divergentes = calcDivergencias();
+  const alerta = $('alertaDivergencia');
+  if(divergentes.length){
+    alerta.style.display = 'block';
+    alerta.innerHTML = '⚠️ <strong>Divergência entre Closers e SDRs detectada:</strong><br>' +
+      divergentes.map(d=>`${d.mes}: Closers ${fmtMoeda(d.totC)} × SDRs ${fmtMoeda(d.totS)} (diferença de ${fmtMoeda(Math.abs(d.diff))})`).join('<br>');
+  } else {
+    alerta.style.display = 'none';
+    alerta.innerHTML = '';
+  }
+
+  renderTimes();
+  renderIndividual();
+  renderRitmo();
+}
+
+// ── Renderiza os cartões de ritmo (dias restantes / necessário por dia / quanto ontem) ──
+function renderRitmo(){
+  const bloco = $('blocoRitmo');
+  const r = calcRitmo();
+  const rotuloDias = document.querySelector('#blocoRitmo .k-dias .rotulo');
+  const rotuloNecessario = document.querySelector('#blocoRitmo .k-necessario .rotulo');
+  const rotuloOntem = document.querySelector('#blocoRitmo .k-ontem .rotulo');
+
+  if(!r){
+    bloco.style.display = 'none';
+  } else if(r.status === 'futuro'){
+    bloco.style.display = 'grid';
+    rotuloDias.textContent = 'Dias restantes para a meta';
+    $('kDias').textContent = '—';
+    $('kDiasDet').textContent = `${r.mesLabel} ainda não começou`;
+    rotuloNecessario.textContent = 'Necessário por dia';
+    $('kNecessario').textContent = '—';
+    $('kNecessarioDet').textContent = '';
+  } else if(r.status === 'fechado'){
+    bloco.style.display = 'grid';
+    rotuloDias.textContent = 'Dias restantes para a meta';
+    $('kDias').textContent = 'Mês encerrado';
+    $('kDiasDet').textContent = `${r.mesLabel} já fechou (${r.diasNoMes} dias corridos)`;
+
+    rotuloNecessario.textContent = 'Resultado da meta';
+    if(r.faltaMes > 0.01){
+      $('kNecessario').textContent = 'Meta não batida';
+      $('kNecessarioDet').textContent = `faltaram ${fmtMoeda(r.faltaMes)} em ${r.mesLabel}`;
+    } else {
+      $('kNecessario').textContent = 'Meta batida';
+      $('kNecessarioDet').textContent = `superada em ${fmtMoeda(-r.faltaMes)} em ${r.mesLabel}`;
+    }
+  } else {
+    // mês corrente
+    bloco.style.display = 'grid';
+    rotuloDias.textContent = 'Dias restantes para a meta';
+    $('kDias').textContent = `${r.diasRestantes} dia${r.diasRestantes!==1?'s':''}`;
+    $('kDiasDet').textContent = `até 31 · ${r.mesLabel} (dia ${r.diasDecorridos} de ${r.diasNoMes}, hoje incluso)`;
+
+    rotuloNecessario.textContent = 'Necessário por dia';
+    if(r.faltaMes > 0.01){
+      $('kNecessario').textContent = fmtMoeda(r.necessarioPorDia) + '/dia';
+      $('kNecessarioDet').textContent = `para bater a meta de ${r.mesLabel} nos dias restantes`;
+    } else {
+      $('kNecessario').textContent = 'Meta batida';
+      $('kNecessarioDet').textContent = `superada em ${fmtMoeda(-r.faltaMes)}`;
+    }
+  }
+
+  // ── Quanto fizemos ontem (mês corrente) / Último dia registrado (mês fechado) ──
+  const o = calcOntem();
+  if(!o || o.semReferencia){
+    rotuloOntem.textContent = 'Quanto fizemos ontem';
+    $('kOntem').textContent = '—';
+    $('kOntemDet').textContent = o ? 'fora dos meses disponíveis' : '';
+  } else if(o.status === 'fechado'){
+    rotuloOntem.textContent = 'Último dia registrado';
+    if(o.semDado){
+      $('kOntem').textContent = '—';
+      $('kOntemDet').textContent = `${o.mesLabel} · sem registro`;
+    } else {
+      $('kOntem').textContent = fmtMoeda(o.valor);
+      $('kOntemDet').textContent = `dia ${o.dia} · ${o.mesLabel} (fechamento do mês)`;
+    }
+  } else if(o.semDado){
+    rotuloOntem.textContent = 'Quanto fizemos ontem';
+    $('kOntem').textContent = fmtMoeda(0);
+    $('kOntemDet').textContent = `dia ${o.dia||''} · ${o.mesLabel||''} · sem registro`.trim();
+  } else {
+    rotuloOntem.textContent = 'Quanto fizemos ontem';
+    $('kOntem').textContent = fmtMoeda(o.valor);
+    $('kOntemDet').textContent = `dia ${o.dia} · ${o.mesLabel}`;
+  }
+
+  renderGraficoLinha();
+}
+
+// ── Gráfico de linha: variação diária do mês de referência (data de atualização) ──
+function renderGraficoLinha(){
+  const svg = $('graficoLinha');
+  const r = calcRitmo();
+  svg.innerHTML = '';
+
+  if(!r || r.status === 'futuro'){
+    $('graficoLinhaSub').textContent = 'sem mês de referência para o período informado';
+    svg.innerHTML = '<text x="460" y="130" text-anchor="middle" fill="var(--tinta-2)" font-size="15" font-family="Public Sans">Informe uma data dentro dos meses disponíveis.</text>';
+    return;
+  }
+
+  const dadosBrutos = DADOS.diarioTotal[r.idx] || {};
+  const diasComVenda = Object.keys(dadosBrutos).map(Number);
+  const ultimoDiaComDado = diasComVenda.length ? Math.max(...diasComVenda) : (r.diasDecorridos || r.diasNoMes);
+  $('graficoLinhaSub').textContent = `evolução dia a dia — ${r.mesLabel} (até o dia ${ultimoDiaComDado})`;
+
+  if(!diasComVenda.length){
+    svg.innerHTML = '<text x="460" y="130" text-anchor="middle" fill="var(--tinta-2)" font-size="15" font-family="Public Sans">Sem dados diários para este mês.</text>';
+    return;
+  }
+
+  // Preenche TODOS os dias de 1 até o último dia com dado (dias sem venda = 0),
+  // para que o eixo X reflita corretamente o calendário e não pule dias.
+  const dias = [];
+  const dados = {};
+  for(let d=1; d<=ultimoDiaComDado; d++){
+    dias.push(d);
+    dados[d] = dadosBrutos[d] ?? 0;
+  }
+
+  const W=920,H=260,mL=70,mR=18,mT=18,mB=34;
+  const iw=W-mL-mR, ih=H-mT-mB;
+  const valores = dias.map(d=>dados[d]);
+  const maxY = Math.max(...valores, 1);
+  const x = i => mL + (dias.length===1 ? iw/2 : iw*i/(dias.length-1));
+  const y = v => mT + ih - (v/maxY)*ih;
+
+  let g='';
+  const passos=4;
+  for(let i=0;i<=passos;i++){
+    const v=Math.round(maxY/passos*i), yy=y(v);
+    g+=`<line x1="${mL}" y1="${yy.toFixed(1)}" x2="${W-mR}" y2="${yy.toFixed(1)}" stroke="#D7DECD" stroke-width="1"/>`;
+    g+=`<text x="${mL-10}" y="${(yy+4).toFixed(1)}" text-anchor="end" font-size="11.5" fill="#5B6B54" font-family="Public Sans">${fmtNum(v)}</text>`;
+  }
+
+  const pontos = dias.map((d,i)=>`${x(i).toFixed(1)},${y(dados[d]).toFixed(1)}`).join(' ');
+  const areaPontos = `${x(0).toFixed(1)},${y(0).toFixed(1)} ${pontos} ${x(dias.length-1).toFixed(1)},${y(0).toFixed(1)}`;
+  g += `<polygon points="${areaPontos}" fill="#3E5C37" opacity="0.10"/>`;
+  g += `<polyline points="${pontos}" fill="none" stroke="#3E5C37" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+
+  const passoLabel = Math.max(1, Math.ceil(dias.length/10));
+  dias.forEach((d,i)=>{
+    g += `<circle cx="${x(i).toFixed(1)}" cy="${y(dados[d]).toFixed(1)}" r="3.2" fill="#3E5C37" data-i="${i}" class="ptoLinha"/>`;
+    if(i % passoLabel === 0 || i===dias.length-1){
+      g += `<text x="${x(i).toFixed(1)}" y="${H-10}" text-anchor="middle" font-size="11" fill="#1C2419" font-family="Public Sans">${d}</text>`;
+    }
+  });
+
+  svg.innerHTML = g;
+
+  const tip = $('tipGraficoLinha');
+  svg.querySelectorAll('.ptoLinha').forEach(pt=>{
+    pt.addEventListener('mousemove', ()=>{
+      const i = +pt.dataset.i;
+      const d = dias[i];
+      const rectSvg = svg.getBoundingClientRect();
+      const bbox = pt.getBoundingClientRect();
+      tip.innerHTML = `<strong>Dia ${d}</strong> · ${fmtMoeda(dados[d])}`;
+      tip.style.left = (bbox.left - rectSvg.left + bbox.width/2) + 'px';
+      tip.style.top = (bbox.top - rectSvg.top) + 'px';
+      tip.style.opacity = 1;
+    });
+    pt.addEventListener('mouseleave', ()=>{ tip.style.opacity=0; });
+  });
+}
+
+// ── Data de atualização: apenas informativa (não filtra nada), default = hoje.
+// Serve de referência para os cartões de ritmo e também define, na carga inicial,
+// qual mês fica marcado sozinho no filtro de período. ──
+function mesCorrentePorData(inputVal){
+  if(!inputVal) return -1;
+  const [anoStr, mesStr] = inputVal.split('-');
+  const ano = parseInt(anoStr,10), mes = parseInt(mesStr,10);
+  return DADOS.meses.findIndex(label=>{
+    const p = parseMesLabel(label);
+    return p.ano===ano && p.mes===mes;
+  });
+}
+
+(function initDataAtualizacao(){
+  const input = $('dataAtualizacao');
+  const hoje = new Date();
+  const iso = hoje.getFullYear() + '-' + String(hoje.getMonth()+1).padStart(2,'0') + '-' + String(hoje.getDate()).padStart(2,'0');
+  input.value = iso;
+  $('hdrDataAtualizacao').textContent = input.value.split('-').reverse().join('/');
+  input.addEventListener('change', ()=>{
+    $('hdrDataAtualizacao').textContent = input.value ? input.value.split('-').reverse().join('/') : '–';
+    renderRitmo();
+  });
+
+  // Visualização padrão: apenas o mês corrente marcado no filtro de período
+  const idxCorrente = mesCorrentePorData(iso);
+  if(idxCorrente !== -1){
+    st.meses = new Set([idxCorrente]);
+  }
+})();
+
+montaToggles();
+montaFiltroDias();
+render();
+
+</script>
+</body>
+</html>
