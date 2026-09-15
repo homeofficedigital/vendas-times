@@ -241,6 +241,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 36px;font-size:12.5px;color
 .cat-badge.senior{background:#F3E1B8;color:#6B4E1A}
 .cat-badge.pleno{background:#E7E5DF;color:#4A473E}
 .cat-badge.junior{background:#E9D3BE;color:#5C3B1E}
+.cat-badge.sem-categoria{background:var(--mdf);color:var(--tinta-2)}
 
 .lider-tag{font-size:10.5px;color:var(--verde-2);font-weight:700}
 
@@ -434,7 +435,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 36px;font-size:12.5px;color
 
   <!-- Estrutura de times -->
   <div class="info-times">
-    <strong>Estrutura comercial (a partir de setembro/26):</strong> Closers em <strong>Time A — "Galáticos"</strong> (Portuga · líder, Paulo, Túlio, Luigi) e <strong>Time B</strong> (Edu · líder, Larissa, Rodrigo, Misael). SDRs em <strong>Time 1 — "Fantásticos Leads"</strong> (Rafael · líder, Alvaro, Vitor, Carioca) e <strong>Time 2 — "Clube das Winx"</strong> (Michelly · líder, Leandro, Gustavo, Iasmin). Beatriz segue contando no total geral de SDR, mas não está enquadrada em nenhum time no momento. Cada pessoa também tem uma categoria com meta individual mensal — os valores de SDR e Closer não se somam entre si (são complementares: a mesma venda é contabilizada uma vez do lado do closer e uma vez do lado do SDR).
+    <strong>Estrutura comercial (a partir de setembro/26):</strong> Closers em <strong>Time A — "Galáticos"</strong> (Portuga · líder, Paulo, Túlio, Luigi) e <strong>Time B</strong> (Edu · líder, Larissa, Rodrigo, Misael). SDRs em <strong>Time 1 — "Fantásticos Leads"</strong> (Rafael · líder, Beatriz, Vitor, Carioca, Alvaro) e <strong>Time 2 — "Clube das Winx"</strong> (Michelly · líder, Leandro, Gustavo, Iasmin). Alvaro entrou no Time 1 sem categoria (Júnior/Pleno/Sênior) e, portanto, sem meta individual — mas seu resultado conta normalmente para o total do Time 1 e para o somatório geral de SDR. Cada pessoa também tem uma categoria com meta individual mensal — os valores de SDR e Closer não se somam entre si (são complementares: a mesma venda é contabilizada uma vez do lado do closer e uma vez do lado do SDR).
     <div class="legenda-categorias">
       <span class="legenda-item"><span class="legenda-dot senior"></span>Sênior — meta R$ 85.000/mês</span>
       <span class="legenda-item"><span class="legenda-dot pleno"></span>Pleno — meta R$ 65.000/mês</span>
@@ -607,9 +608,10 @@ const PESSOAS_CLOSER = {
 };
 const PESSOAS_SDR = {
   'RAFAEL':      { apelido:'Rafael',   time:'1', categoria:'senior', meta:85000, lider:true },
-  'ALVARO':      { apelido:'Alvaro',   time:'1', categoria:'pleno',  meta:65000 },
+  'BEATRIZ':     { apelido:'Beatriz',  time:'1', categoria:'pleno',  meta:65000 },
   'VITOR':       { apelido:'Vitor',    time:'1', categoria:'junior', meta:50000 },
   'CARIOCA':     { apelido:'Carioca',  time:'1', categoria:'junior', meta:50000 },
+  'ALVARO':      { apelido:'Alvaro',   time:'1' },
   'MICHELLY':    { apelido:'Michelly', time:'2', categoria:'senior', meta:85000, lider:true },
   'LEANDRO B.':  { apelido:'Leandro',  time:'2', categoria:'pleno',  meta:65000 },
   'GUSTAVO':     { apelido:'Gustavo',  time:'2', categoria:'junior', meta:50000 },
@@ -620,7 +622,7 @@ const TIMES_CLOSER = {
   B: { nome:'Time B', sigla:'TIME B', badge:'tB', membros:['EDUARDO','LARISSA','RODRIGO','MISAEL'] },
 };
 const TIMES_SDR = {
-  '1': { nome:'Fantásticos Leads', sigla:'TIME 1', badge:'t1', icone:'badge4', membros:['RAFAEL','ALVARO','VITOR','CARIOCA'] },
+  '1': { nome:'Fantásticos Leads', sigla:'TIME 1', badge:'t1', icone:'badge4', membros:['RAFAEL','BEATRIZ','VITOR','CARIOCA','ALVARO'] },
   '2': { nome:'Clube das Winx', sigla:'TIME 2', badge:'t2', icone:'fada', membros:['MICHELLY','LEANDRO B.','GUSTAVO','IASMIN'] },
 };
 const CATEGORIA_LABEL = { senior:'Sênior', pleno:'Pleno', junior:'Júnior' };
@@ -847,7 +849,7 @@ function renderTimeCard(container, timeKey, timeInfo, mapaDiario, metaTime){
     })
     .sort((a,b)=>b.v-a.v)
     .map(({info,v}) => `<div class="team-card-membro">
-        <span class="m-nome">${info.apelido}${info.lider?' <span class="lider-tag">★ líder</span>':''} <span class="cat-badge ${info.categoria}">${CATEGORIA_LABEL[info.categoria]}</span></span>
+        <span class="m-nome">${info.apelido}${info.lider?' <span class="lider-tag">★ líder</span>':''}${info.categoria ? ` <span class="cat-badge ${info.categoria}">${CATEGORIA_LABEL[info.categoria]}</span>` : ''}</span>
         <span class="m-valor">${fmtMoeda(v)}</span>
       </div>`).join('');
 
