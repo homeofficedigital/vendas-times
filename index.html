@@ -131,7 +131,7 @@ h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:20px;l
 }
 .kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--verde-3)}
 .kpi.k-meta::before{background:var(--tinta-2)}
-.kpi.k-falta::before{background:var(--ouro)}
+.kpi.k-projecao::before{background:var(--ouro)}
 .kpi.k-atg::before{background:var(--bronze)}
 .kpi.k-evo::before{background:var(--verde-3)}
 .kpi.k-lowticket-valor::before{background:var(--prata)}
@@ -393,7 +393,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 36px;font-size:12.5px;color
   <div class="kpis">
     <div class="kpi k-meta"><div class="rotulo">Meta do período</div><div class="valor" id="kMeta">–</div><div class="detalhe" id="kMetaDet"></div></div>
     <div class="kpi"><div class="rotulo">Total vendido</div><div class="valor" id="kTotal">–</div><div class="detalhe" id="kTotalDet"></div></div>
-    <div class="kpi k-falta"><div class="rotulo">Falta para a meta</div><div class="valor" id="kFalta">–</div><div class="detalhe" id="kFaltaDet"></div></div>
+    <div class="kpi k-projecao"><div class="rotulo">Projeção de fechamento</div><div class="valor" id="kProjecao">–</div><div class="detalhe" id="kProjecaoDet"></div></div>
     <div class="kpi k-evo"><div class="rotulo" id="kEvoRotulo">Evolução vs. mês anterior</div><div class="valor" id="kEvo">–</div><div class="detalhe" id="kEvoDet"></div></div>
     <div class="kpi k-media-filtro"><div class="rotulo">Média diária (no filtro)</div><div class="valor" id="kMediaFiltro">–</div><div class="detalhe" id="kMediaFiltroDet"></div></div>
   </div>
@@ -791,6 +791,9 @@ const ERA_OUTUBRO = {
     'EDUARDO':    { apelido:'Edu',     time:'B', categoria:'senior', meta:85000, lider:true },
     'LARISSA':    { apelido:'Larissa', time:'B', categoria:'pleno',  meta:65000 },
     'RODRIGO':    { apelido:'Rodrigo', time:'B', categoria:'junior', meta:50000 },
+    // Alvaro entrou como closer júnior sem time — segue a meta/categoria individual,
+    // mas não soma no total de nenhum time (mesmo tratamento do Túlio/Misael).
+    'ALVARO':     { apelido:'Alvaro',  categoria:'junior', meta:50000 },
   },
   pessoasSdr: {
     // RAFAEL e LEANDRO B. saíram dos times (resultados seguem no ranking/total).
@@ -1227,7 +1230,7 @@ function renderIndividualBloco(container, pessoas, mapaDiario, timesCloser, time
         row.className = 'individual-row';
         row.innerHTML = `
           <div class="individual-row-topo">
-            <span class="individual-nome">${info.apelido}${info.lider?' <span class="lider-tag">★</span>':''} <span class="time-badge ${timesCloser[info.time]?timesCloser[info.time].badge:timesSdr[info.time].badge}">${timesCloser[info.time]?timesCloser[info.time].sigla:timesSdr[info.time].sigla}</span></span>
+            <span class="individual-nome">${info.apelido}${info.lider?' <span class="lider-tag">★</span>':''}${(() => { const t = info.time && (timesCloser[info.time]||timesSdr[info.time]); return t ? ` <span class="time-badge ${t.badge}">${t.sigla}</span>` : ''; })()}</span>
             <span class="individual-num"><strong>${fmtMoeda(valor)}</strong> / ${fmtMoeda(metaIndiv)} · ${pct.toFixed(1)}%</span>
           </div>
           <div class="individual-bar-trilho"><div class="individual-bar ${bateu?'bateu':cat}" style="width:${Math.min(pct,100).toFixed(1)}%"></div></div>
@@ -1307,15 +1310,28 @@ function render(){
   const falta = meta - totGeral;
 
   $('kMeta').textContent = fmtMoeda(meta);
-  $('kMetaDet').textContent = [...st.meses].sort().map(i=>DADOS.meses[i]).join(' + ');
+  $('kMetaDet').textContent = falta > 0.01 ? `faltam ${fmtMoeda(falta)}` : `meta superada em ${fmtMoeda(-falta)}`;
   $('kTotal').textContent = fmtMoeda(totGeral);
   $('kTotalDet').textContent = (meta ? `${(totGeral/meta*100).toFixed(1)}% da meta` : '—') + filtroDiasTexto;
-  if(falta > 0.01){
-    $('kFalta').textContent = fmtMoeda(falta);
-    $('kFaltaDet').textContent = 'para atingir 100% da meta';
-  } else {
-    $('kFalta').textContent = fmtMoeda(0);
-    $('kFaltaDet').textContent = `meta superada em ${fmtMoeda(-falta)}`;
+
+  // ── Projeção de fechamento: com base no ritmo até o dia em questão, em qual valor
+  // fecharíamos o mês? Só faz sentido para um único mês em andamento (o corrente) —
+  // mês já fechado mostra o resultado final real; sem mês corrente no recorte, fica vazio. ──
+  {
+    const r = calcRitmo();
+    const elProj = $('kProjecao'), elProjDet = $('kProjecaoDet');
+    if(r && r.status==='corrente' && st.meses.size===1 && st.meses.has(r.idx)){
+      const projecao = r.diasDecorridos>0 ? (r.totalMes / r.diasDecorridos) * r.diasNoMes : 0;
+      const diffMeta = projecao - r.metaMes;
+      elProj.textContent = fmtMoeda(projecao);
+      elProjDet.textContent = `ritmo até o dia ${r.diasDecorridos} de ${r.diasNoMes} · ${diffMeta>=0 ? 'bateria a meta em '+fmtMoeda(diffMeta) : 'ficaria '+fmtMoeda(-diffMeta)+' abaixo da meta'}`;
+    } else if(r && r.status==='fechado' && st.meses.size===1 && st.meses.has(r.idx)){
+      elProj.textContent = fmtMoeda(r.totalMes);
+      elProjDet.textContent = 'mês encerrado · resultado final';
+    } else {
+      elProj.textContent = '—';
+      elProjDet.textContent = 'selecione um único mês para ver a projeção';
+    }
   }
   $('kLowTicketValor').textContent = fmtMoeda(lowTicket.valor);
   $('kLowTicketValorDet').textContent = `já somado ao Total Vendido${filtroDiasTexto}`;
