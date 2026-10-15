@@ -1681,6 +1681,23 @@ function renderRitmo(){
 }
 
 // ── Gráfico de linha: variação diária do mês de referência (data de atualização) ──
+// Calcula um passo "redondo" para o eixo (1/2/2,5/5/10 × potência de 10) a partir do valor
+// máximo e do nº de divisões desejado — mesmo algoritmo usado por bibliotecas de gráfico
+// para evitar marcações "picadas" como 6.434, 12.869, 19.303.
+function passoNiceEixo(valorMax, divisoesAlvo){
+  if(valorMax<=0) return 1;
+  const passoBruto = valorMax/divisoesAlvo;
+  const magnitude = Math.pow(10, Math.floor(Math.log10(passoBruto)));
+  const normalizado = passoBruto/magnitude;
+  let niceNormalizado;
+  if(normalizado<=1) niceNormalizado=1;
+  else if(normalizado<=2) niceNormalizado=2;
+  else if(normalizado<=2.5) niceNormalizado=2.5;
+  else if(normalizado<=5) niceNormalizado=5;
+  else niceNormalizado=10;
+  return niceNormalizado*magnitude;
+}
+
 function renderGraficoLinha(){
   const svg = $('graficoLinha');
   const r = calcRitmo();
@@ -1714,14 +1731,18 @@ function renderGraficoLinha(){
   const W=920,H=260,mL=70,mR=18,mT=18,mB=34;
   const iw=W-mL-mR, ih=H-mT-mB;
   const valores = dias.map(d=>dados[d]);
-  const maxY = Math.max(...valores, 1);
+  const maxYRaw = Math.max(...valores, 1);
+  // Eixo Y com números redondos (10.000 / 20.000 / 30.000...) em vez de dividir o pico em
+  // partes iguais (o que gerava números "picados" tipo 6.434, 12.869, 19.303).
+  const niceStep = passoNiceEixo(maxYRaw, 4);
+  const maxY = Math.ceil(maxYRaw/niceStep)*niceStep || niceStep;
   const x = i => mL + (dias.length===1 ? iw/2 : iw*i/(dias.length-1));
   const y = v => mT + ih - (v/maxY)*ih;
 
   let g='';
-  const passos=4;
+  const passos = Math.round(maxY/niceStep);
   for(let i=0;i<=passos;i++){
-    const v=Math.round(maxY/passos*i), yy=y(v);
+    const v=niceStep*i, yy=y(v);
     g+=`<line x1="${mL}" y1="${yy.toFixed(1)}" x2="${W-mR}" y2="${yy.toFixed(1)}" stroke="#D7DECD" stroke-width="1"/>`;
     g+=`<text x="${mL-10}" y="${(yy+4).toFixed(1)}" text-anchor="end" font-size="11.5" fill="#5B6B54" font-family="Public Sans">${fmtNum(v)}</text>`;
   }
