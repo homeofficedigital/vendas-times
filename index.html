@@ -980,14 +980,24 @@ function diasElapsedNoMes(idx){
 }
 
 // ── Quantidade de dias efetivamente contados no filtro atual (para a média diária) —
-// conta dias corridos (mesmo sem venda), nunca dias futuros que ainda não aconteceram ──
+// conta dias corridos (mesmo sem venda), nunca dias futuros que ainda não aconteceram.
+// A partir de outubro/26, domingos saem da contagem (mas uma venda registrada num domingo
+// continua somada normalmente no totGeral — só o DIVISOR da média muda) ──
 function diasNoFiltro(){
   let n=0;
+  const io = idxOutubro();
   st.meses.forEach(idx=>{
     const elapsed = diasElapsedNoMes(idx);
     const ini = Math.max(st.diaIni, 1);
     const fim = Math.min(st.diaFim, elapsed);
-    if(fim>=ini) n += (fim-ini+1);
+    if(fim>=ini){
+      if(io>=0 && idx>=io){
+        const { ano, mes } = parseMesLabel(DADOS.meses[idx]);
+        n += diasUteisNoIntervalo(ano, mes, ini, fim);
+      } else {
+        n += (fim-ini+1);
+      }
+    }
   });
   return n;
 }
@@ -1015,6 +1025,16 @@ function compararMes(anoA,mesA, anoB,mesB){
   return mesA-mesB;
 }
 
+// Conta os dias de um intervalo (inclusive) que NÃO são domingo — usado em "dias restantes
+// para a meta" e "necessário por dia", já que domingo não entra no ritmo de vendas.
+function diasUteisNoIntervalo(ano, mes, diaIni, diaFim){
+  let n = 0;
+  for(let d=diaIni; d<=diaFim; d++){
+    if(new Date(ano, mes-1, d).getDay() !== 0) n++;
+  }
+  return n;
+}
+
 function calcRitmo(){
   const hoje = hojeInfo();
   if(!hoje) return null;
@@ -1032,9 +1052,14 @@ function calcRitmo(){
   if(cmp === 0){
     // mês corrente: ainda em andamento
     const diasDecorridos = Math.min(Math.max(hoje.dia,1), diasNoMes);
-    const diasRestantes = diasNoMes - diasDecorridos + 1; // inclusive hoje
+    const diasRestantes = diasUteisNoIntervalo(ano, mes, diasDecorridos, diasNoMes); // inclusive hoje, sem domingos
     const necessarioPorDia = faltaMes > 0.01 ? faltaMes/diasRestantes : 0;
-    return { status:'corrente', idx, mesLabel:DADOS.meses[idx], diasNoMes, diasDecorridos, diasRestantes, totalMes, metaMes, faltaMes, necessarioPorDia };
+    // Para projeção de fechamento: dias úteis (sem domingo) decorridos/no mês, a partir de
+    // outubro/26 — meses anteriores continuam com a contagem corrida de sempre.
+    const io = idxOutubro();
+    const diasUteisDecorridos = (io>=0 && idx>=io) ? diasUteisNoIntervalo(ano, mes, 1, diasDecorridos) : diasDecorridos;
+    const diasUteisNoMes = (io>=0 && idx>=io) ? diasUteisNoIntervalo(ano, mes, 1, diasNoMes) : diasNoMes;
+    return { status:'corrente', idx, mesLabel:DADOS.meses[idx], diasNoMes, diasDecorridos, diasRestantes, diasUteisDecorridos, diasUteisNoMes, totalMes, metaMes, faltaMes, necessarioPorDia };
   }
   if(cmp < 0){
     // mês fechado: já passou por completo
@@ -1603,10 +1628,11 @@ function render(){
     const r = calcRitmo();
     const elProj = $('kProjecao'), elProjDet = $('kProjecaoDet');
     if(r && r.status==='corrente' && st.meses.size===1 && st.meses.has(r.idx)){
-      const projecao = r.diasDecorridos>0 ? (r.totalMes / r.diasDecorridos) * r.diasNoMes : 0;
+      const projecao = r.diasUteisDecorridos>0 ? (r.totalMes / r.diasUteisDecorridos) * r.diasUteisNoMes : 0;
       const diffMeta = projecao - r.metaMes;
+      const notaDomingo = r.diasUteisNoMes!==r.diasNoMes ? ' (sem domingos)' : '';
       elProj.textContent = fmtMoeda(projecao);
-      elProjDet.textContent = `ritmo até o dia ${r.diasDecorridos} de ${r.diasNoMes} · ${diffMeta>=0 ? 'bateria a meta em '+fmtMoeda(diffMeta) : 'ficaria '+fmtMoeda(-diffMeta)+' abaixo da meta'}`;
+      elProjDet.textContent = `ritmo até o dia ${r.diasDecorridos} de ${r.diasNoMes}${notaDomingo} · ${diffMeta>=0 ? 'bateria a meta em '+fmtMoeda(diffMeta) : 'ficaria '+fmtMoeda(-diffMeta)+' abaixo da meta'}`;
     } else if(r && r.status==='fechado' && st.meses.size===1 && st.meses.has(r.idx)){
       elProj.textContent = fmtMoeda(r.totalMes);
       elProjDet.textContent = 'mês encerrado · resultado final';
@@ -1667,7 +1693,7 @@ function render(){
 
   const nDias = diasNoFiltro();
   $('kMediaFiltro').textContent = nDias ? fmtMoeda(totGeral/nDias) + '/dia' : '—';
-  $('kMediaFiltroDet').textContent = nDias ? `${nDias} dia${nDias>1?'s':''} corrido${nDias>1?'s':''} no recorte atual` : 'sem dias no recorte atual';
+  $('kMediaFiltroDet').textContent = nDias ? `${nDias} dia${nDias>1?'s':''} no recorte atual (domingos não contam a partir de out/26)` : 'sem dias no recorte atual';
 
   slats($('gCloser'), rankCloser);
   slats($('gSdr'), rankSdr);
@@ -1743,7 +1769,7 @@ function renderRitmo(){
     bloco.style.display = 'grid';
     rotuloDias.textContent = 'Dias restantes para a meta';
     $('kDias').textContent = `${r.diasRestantes} dia${r.diasRestantes!==1?'s':''}`;
-    $('kDiasDet').textContent = `até 31 · ${r.mesLabel} (dia ${r.diasDecorridos} de ${r.diasNoMes}, hoje incluso)`;
+    $('kDiasDet').textContent = `${r.mesLabel}, sem contar domingos (dia ${r.diasDecorridos} de ${r.diasNoMes}, hoje incluso)`;
 
     rotuloNecessario.textContent = 'Necessário por dia';
     if(r.faltaMes > 0.01){
