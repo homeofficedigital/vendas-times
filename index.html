@@ -568,7 +568,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 36px;font-size:12.5px;color
   <div class="info-times">
     <strong>Estrutura comercial — setembro/26:</strong> Closers em <strong>Time A — "Galáticos"</strong> (Portuga · líder, Paulo, Túlio, Luigi) e <strong>Time B</strong> (Edu · líder, Larissa, Rodrigo, Misael). SDRs em <strong>Time 1 — "Fantásticos Leads"</strong> (Rafael · líder, Beatriz, Vitor, Carioca, Alvaro) e <strong>Time 2 — "Clube das Winx"</strong> (Michelly · líder, Leandro, Gustavo, Iasmin). Alvaro entrou no Time 1 sem categoria (Júnior/Pleno/Sênior) e, portanto, sem meta individual — mas seu resultado conta normalmente para o total do Time 1 e para o somatório geral de SDR.
     <br><br>
-    <strong>A partir de outubro/26:</strong> Túlio e Misael saíram dos times de Closers — seus resultados deixam de contar para o total de Time A/B, mas continuam no Ranking de Closers e no somatório geral. Rafael e Leandro saíram dos times de SDR, com o mesmo tratamento (ranking e somatório geral, fora da soma por time). Vitor migrou para o <strong>Time 2 — "Clube das Winx"</strong>, que passa a ter só Iasmin e Vitor. O <strong>Time 1 — "Fantásticos Leads"</strong> passa a ter só Carioca, Beatriz e Alvaro. Michelly e Gustavo formam o novo <strong>Time 3 — "Sprinters"</strong>: não têm meta em R$ nem somatório de time (suas vendas contam no Ranking de SDRs e no somatório geral, mas não no total de nenhum time) — em vez disso, são acompanhados pela taxa de no-show das reuniões agendadas.
+    <strong>A partir de outubro/26:</strong> Túlio e Misael saíram dos times de Closers — seus resultados deixam de contar para o total de Time A/B, mas continuam no Ranking de Closers e no somatório geral. Rafael e Leandro saíram dos times de SDR, com o mesmo tratamento (ranking e somatório geral, fora da soma por time). Vitor migrou para o <strong>Time 2 — "Clube das Winx"</strong>, que passa a ter só Iasmin e Vitor. O <strong>Time 1 — "Fantásticos Leads"</strong> passa a ter só Carioca e Beatriz. Alvaro deixou o Time 1 de SDRs e passou a ser closer do <strong>Time B</strong> (júnior, meta R$ 50.000/mês), que fica com Edu, Larissa, Rodrigo e Alvaro; vendas em que ele aparece como SDR seguem no Ranking de SDRs e no somatório geral, fora da soma por time. Michelly e Gustavo formam o novo <strong>Time 3 — "Sprinters"</strong>: não têm meta em R$ nem somatório de time (suas vendas contam no Ranking de SDRs e no somatório geral, mas não no total de nenhum time) — em vez disso, são acompanhados pela taxa de no-show das reuniões agendadas.
     <br><br>
     Cada pessoa também tem uma categoria com meta individual mensal — os valores de SDR e Closer não se somam entre si (são complementares: a mesma venda é contabilizada uma vez do lado do closer e uma vez do lado do SDR).
     <div class="legenda-categorias">
@@ -823,16 +823,16 @@ const ERA_OUTUBRO = {
     'EDUARDO':    { apelido:'Edu',     time:'B', categoria:'senior', meta:85000, lider:true },
     'LARISSA':    { apelido:'Larissa', time:'B', categoria:'pleno',  meta:65000 },
     'RODRIGO':    { apelido:'Rodrigo', time:'B', categoria:'junior', meta:50000 },
-    // Alvaro entrou como closer júnior sem time — segue a meta/categoria individual,
-    // mas não soma no total de nenhum time (mesmo tratamento do Túlio/Misael).
-    'ALVARO':     { apelido:'Alvaro',  categoria:'junior', meta:50000 },
+    // Alvaro passou a integrar o Time B de closers (júnior).
+    'ALVARO':     { apelido:'Alvaro',  time:'B', categoria:'junior', meta:50000 },
   },
   pessoasSdr: {
     // RAFAEL e LEANDRO B. saíram dos times (resultados seguem no ranking/total).
     // VITOR migrou para o Time 2 (Clube das Winx). MICHELLY/GUSTAVO viraram o time "Sprinters".
     'CARIOCA':     { apelido:'Carioca',  time:'1', categoria:'junior', meta:50000 },
     'BEATRIZ':     { apelido:'Beatriz',  time:'1', categoria:'pleno',  meta:65000 },
-    'ALVARO':      { apelido:'Alvaro',   time:'1' },
+    // ALVARO saiu do Time 1 (Fantásticos Leads) — agora é closer do Time B; vendas em que
+    // aparece como SDR seguem no Ranking de SDRs e no somatório geral, fora da soma por time.
     'IASMIN':      { apelido:'Iasmin',   time:'2', categoria:'junior', meta:50000 },
     'VITOR':       { apelido:'Vitor',    time:'2', categoria:'junior', meta:50000 },
     'BOT':         { apelido:'Bot',      time:'2', categoria:'senior', meta:85000 },
@@ -844,10 +844,10 @@ const ERA_OUTUBRO = {
   },
   timesCloser: {
     A: { nome:'Galáticos', sigla:'TIME A', badge:'tA', icone:'brasao', membros:['LEANDRO PT','PAULO','LUIGI'] },
-    B: { nome:'Time B', sigla:'TIME B', badge:'tB', membros:['EDUARDO','LARISSA','RODRIGO'] },
+    B: { nome:'Time B', sigla:'TIME B', badge:'tB', membros:['EDUARDO','LARISSA','RODRIGO','ALVARO'] },
   },
   timesSdr: {
-    '1': { nome:'Fantásticos Leads', sigla:'TIME 1', badge:'t1', icone:'badge4', membros:['CARIOCA','BEATRIZ','ALVARO'] },
+    '1': { nome:'Fantásticos Leads', sigla:'TIME 1', badge:'t1', icone:'badge4', membros:['CARIOCA','BEATRIZ'] },
     '2': { nome:'Clube das Winx', sigla:'TIME 2', badge:'t2', icone:'fada', membros:['IASMIN','VITOR','BOT'] },
   },
   // Sprinters NÃO é um time de vendas — é uma categoria de trabalho à parte, por isso fica
