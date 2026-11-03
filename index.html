@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home Office Digital · Dashboard Comercial</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Public+Sans:wght@400;500;600;700&family=Anton&display=swap" rel="stylesheet">
 <style>
 :root{
   --verde:#263A21;
@@ -349,6 +349,72 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 36px;font-size:12.5px;color
 .individual-bar.pleno{background:var(--prata)}
 .individual-bar.junior{background:var(--bronze)}
 .individual-bar.bateu{background:var(--verde-3)}
+/* ══ Tema Black Friday — ativo só quando o mês em foco é Novembro/26 ══════════
+   Fundo escuro (preto/grafite) com detalhes em verde HOD, branco e dourado. */
+.bf-banner{display:none}
+body.tema-black{
+  --offwhite:#0D100C; --branco:#161A15; --mdf:#232920; --mdf-2:#323A2E;
+  --tinta:#F1F4EC; --tinta-2:#A7B39F; --verde-3:#7FB86E; --verde-2:#5E9450;
+  background:
+    radial-gradient(900px 420px at 50% -120px, rgba(154,201,138,.10), transparent 70%),
+    #0D100C;
+}
+body.tema-black header{
+  background:radial-gradient(680px 260px at 50% 0, rgba(154,201,138,.16), transparent 72%), #070907;
+  border-bottom:3px solid var(--ouro);
+}
+body.tema-black header, body.tema-black h1{color:#F5F6F2}
+body.tema-black .brand-eyebrow{color:var(--ouro)}
+body.tema-black .header-periodo-resumo{color:#C7D0C0}
+body.tema-black .header-periodo-resumo strong{color:#F5F6F2}
+body.tema-black .bf-banner{
+  display:block;position:relative;overflow:hidden;
+  max-width:1180px;margin:18px auto 0;border-radius:14px;
+  background:
+    radial-gradient(520px 220px at 50% -40px, rgba(196,226,150,.34), transparent 70%),
+    radial-gradient(260px 160px at 12% 110%, rgba(217,164,65,.14), transparent 70%),
+    radial-gradient(260px 160px at 88% 110%, rgba(217,164,65,.14), transparent 70%),
+    linear-gradient(180deg,#151a13,#0a0c09);
+  border:1px solid rgba(217,164,65,.35);
+  box-shadow:inset 0 0 60px rgba(0,0,0,.6);
+}
+.bf-banner::before{ /* feixe de luz diagonal */
+  content:"";position:absolute;inset:-40% 30% auto 30%;height:170%;
+  background:linear-gradient(180deg,rgba(220,240,190,.10),transparent 70%);
+  transform:skewX(-12deg);pointer-events:none;
+}
+.bf-conteudo{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:22px 16px 20px;text-align:center}
+.bf-eyebrow{font-size:11px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--ouro)}
+.bf-titulo{
+  font-family:'Anton','Bricolage Grotesque',sans-serif;font-size:clamp(40px,8vw,84px);line-height:1;letter-spacing:.02em;
+  color:#C9EBA0;text-shadow:0 0 18px rgba(170,220,120,.45),0 0 2px rgba(255,255,255,.4);
+}
+.bf-sub{font-size:13px;color:#C7D0C0}
+.bf-sub strong{color:#F5F6F2}
+body.tema-black .chip-mes.ativo,
+body.tema-black .botao-toggle-dias.ativo{background:var(--verde-2);border-color:var(--verde-3);color:#F5F6F2}
+body.tema-black .chip-mes, body.tema-black .botao-toggle-dias,
+body.tema-black #limpar, body.tema-black #limparDias{color:var(--tinta)}
+body.tema-black input[type="date"]{color-scheme:dark}
+body.tema-black .busca-nome{color:var(--tinta)}
+body.tema-black .tooltip{background:#000;color:#F5F6F2;border:1px solid var(--ouro)}
+body.tema-black .time-badge, body.tema-black .destaque-tag{color:#F5F6F2}
+body.tema-black .lider-tag{color:var(--ouro)}
+body.tema-black .kpi .valor.positivo{color:#9AC98A}
+body.tema-black .kpi{border-color:var(--mdf-2)}
+body.tema-black .kpi::before{opacity:.95}
+body.tema-black .slat-barra{border-right-color:rgba(255,255,255,.12)}
+body.tema-black .individual-bar.bateu, body.tema-black .team-card-barra{background:#7FB86E}
+body.tema-black .alerta-divergencia{background:#2A2214;border-color:#6B5426;color:#E9D7B0}
+body.tema-black .alerta-divergencia strong{color:#F3E1B8}
+body.tema-black .metrica-card{background:var(--branco);border-color:var(--mdf-2)}
+/* gráfico de linha (cores definidas no SVG — o CSS sobrepõe) */
+body.tema-black #graficoLinha line{stroke:#2B3228}
+body.tema-black #graficoLinha text{fill:#A7B39F}
+body.tema-black #graficoLinha polyline{stroke:#9AC98A}
+body.tema-black #graficoLinha polygon{fill:#9AC98A;opacity:.14}
+body.tema-black #graficoLinha circle{fill:#C9EBA0}
+body.tema-black footer{color:var(--tinta-2)}
 </style>
 </head>
 <body>
@@ -367,6 +433,15 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 36px;font-size:12.5px;color
     </div>
   </div>
 </header>
+
+<!-- Selo Black Friday (aparece só em novembro/26) -->
+<div class="bf-banner" aria-hidden="true">
+  <div class="bf-conteudo">
+    <span class="bf-eyebrow">★ HOD · Novembro 2026 ★</span>
+    <span class="bf-titulo">BLACK FRIDAY</span>
+    <span class="bf-sub">mês de Black Friday · meta do mês <strong id="bfMeta">–</strong></span>
+  </div>
+</div>
 
 <main>
 
@@ -569,6 +644,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 36px;font-size:12.5px;color
     <strong>Estrutura comercial — setembro/26:</strong> Closers em <strong>Time A — "Galáticos"</strong> (Portuga · líder, Paulo, Túlio, Luigi) e <strong>Time B</strong> (Edu · líder, Larissa, Rodrigo, Misael). SDRs em <strong>Time 1 — "Fantásticos Leads"</strong> (Rafael · líder, Beatriz, Vitor, Carioca, Alvaro) e <strong>Time 2 — "Clube das Winx"</strong> (Michelly · líder, Leandro, Gustavo, Iasmin). Alvaro entrou no Time 1 sem categoria (Júnior/Pleno/Sênior) e, portanto, sem meta individual — mas seu resultado conta normalmente para o total do Time 1 e para o somatório geral de SDR.
     <br><br>
     <strong>A partir de outubro/26:</strong> Túlio e Misael saíram dos times de Closers — seus resultados deixam de contar para o total de Time A/B, mas continuam no Ranking de Closers e no somatório geral. Rafael e Leandro saíram dos times de SDR, com o mesmo tratamento (ranking e somatório geral, fora da soma por time). Vitor migrou para o <strong>Time 2 — "Clube das Winx"</strong>, que passa a ter só Iasmin e Vitor. O <strong>Time 1 — "Fantásticos Leads"</strong> passa a ter só Carioca e Beatriz. Alvaro deixou o Time 1 de SDRs e passou a ser closer do <strong>Time B</strong> (júnior, meta R$ 50.000/mês), que fica com Edu, Larissa, Rodrigo e Alvaro; vendas em que ele aparece como SDR seguem no Ranking de SDRs e no somatório geral, fora da soma por time. Michelly e Gustavo formam o novo <strong>Time 3 — "Sprinters"</strong>: não têm meta em R$ nem somatório de time (suas vendas contam no Ranking de SDRs e no somatório geral, mas não no total de nenhum time) — em vez disso, são acompanhados pela taxa de no-show das reuniões agendadas.
+    <br><br>
+    <strong>A partir de novembro/26:</strong> Closers em <strong>Time A — "Galáticos"</strong> (Portuga · líder, Luigi, Paulo, João Pedro) e <strong>Time B</strong> (Edu · líder, Larissa, Rodrigo, Renan, Lauhen). SDRs em <strong>Time 1 — "Fantásticos Leads"</strong> (Rafael · líder, Beatriz, Carioca, Marcus, Gustavo) e <strong>Time 2 — "Clube das Winx"</strong> (Michelly · líder, Iasmin, Vitor, Alvaro, Carol). Novatos (João Pedro, Renan, Lauhen, Marcus e Carol) entram como Júnior. Michelly e Gustavo voltam aos times, por isso a seção Sprinters deixa de aparecer. O BOT sai do Clube das Winx — suas vendas seguem no Ranking de SDRs e no somatório geral. Meta de novembro: R$ 700.000.
     <br><br>
     Cada pessoa também tem uma categoria com meta individual mensal — os valores de SDR e Closer não se somam entre si (são complementares: a mesma venda é contabilizada uma vez do lado do closer e uma vez do lado do SDR).
     <div class="legenda-categorias">
@@ -855,6 +932,44 @@ const ERA_OUTUBRO = {
   // As vendas de Michelly/Gustavo continuam valendo no Ranking de SDRs e no total geral.
   sprinters: { membros:['MICHELLY','GUSTAVO'] },
 };
+
+// ── Novembro/26 em diante: nova formação dos times (novatos entram como Júnior).
+// BOT saiu do Clube das Winx e MICHELLY/GUSTAVO voltaram aos times — por isso não há Sprinters.
+// Quem não está nos times (BOT, TÚLIO, LEANDRO B. etc.) segue no ranking e no total geral.
+const ERA_NOVEMBRO = {
+  pessoasCloser: {
+    'LEANDRO PT': { apelido:'Portuga',    time:'A', categoria:'senior', meta:85000, lider:true },
+    'LUIGI':      { apelido:'Luigi',      time:'A', categoria:'junior', meta:50000 },
+    'PAULO':      { apelido:'Paulo',      time:'A', categoria:'junior', meta:50000 },
+    'JOÃO PEDRO': { apelido:'João Pedro', time:'A', categoria:'junior', meta:50000 },
+    'EDUARDO':    { apelido:'Edu',        time:'B', categoria:'senior', meta:85000, lider:true },
+    'LARISSA':    { apelido:'Larissa',    time:'B', categoria:'pleno',  meta:65000 },
+    'RODRIGO':    { apelido:'Rodrigo',    time:'B', categoria:'junior', meta:50000 },
+    'RENAN':      { apelido:'Renan',      time:'B', categoria:'junior', meta:50000 },
+    'LAUHEN':     { apelido:'Lauhen',     time:'B', categoria:'junior', meta:50000 },
+  },
+  pessoasSdr: {
+    'RAFAEL':     { apelido:'Rafael',     time:'1', categoria:'senior', meta:85000, lider:true },
+    'BEATRIZ':    { apelido:'Beatriz',    time:'1', categoria:'pleno',  meta:65000 },
+    'CARIOCA':    { apelido:'Carioca',    time:'1', categoria:'junior', meta:50000 },
+    'MARCUS':     { apelido:'Marcus',     time:'1', categoria:'junior', meta:50000 },
+    'GUSTAVO':    { apelido:'Gustavo',    time:'1', categoria:'junior', meta:50000 },
+    'MICHELLY':   { apelido:'Michelly',   time:'2', categoria:'senior', meta:85000, lider:true },
+    'IASMIN':     { apelido:'Iasmin',     time:'2', categoria:'junior', meta:50000 },
+    'VITOR':      { apelido:'Vitor',      time:'2', categoria:'junior', meta:50000 },
+    'ALVARO':     { apelido:'Alvaro',     time:'2', categoria:'junior', meta:50000 },
+    'CAROL':      { apelido:'Carol',      time:'2', categoria:'junior', meta:50000 },
+  },
+  timesCloser: {
+    A: { nome:'Galáticos', sigla:'TIME A', badge:'tA', icone:'brasao', membros:['LEANDRO PT','LUIGI','PAULO','JOÃO PEDRO'] },
+    B: { nome:'Time B',    sigla:'TIME B', badge:'tB', membros:['EDUARDO','LARISSA','RODRIGO','RENAN','LAUHEN'] },
+  },
+  timesSdr: {
+    '1': { nome:'Fantásticos Leads', sigla:'TIME 1', badge:'t1', icone:'badge4', membros:['RAFAEL','BEATRIZ','CARIOCA','MARCUS','GUSTAVO'] },
+    '2': { nome:'Clube das Winx',    sigla:'TIME 2', badge:'t2', icone:'fada',   membros:['MICHELLY','IASMIN','VITOR','ALVARO','CAROL'] },
+  },
+  sprinters: null,
+};
 // ── Reuniões/no-show dos Sprinters, diarizado (DADOS.sprintersReunioes[idxMes][dia] = {ag, ac}) ──
 // Segue o mesmo recorte de meses/dias do restante do dashboard (st.meses, st.diaIni/diaFim).
 function sprintersDiasFiltrado(){
@@ -895,6 +1010,8 @@ function escalaCor(valor, min, max, maiorEhMelhor){
 function idxOutubro(){ return DADOS.meses.indexOf('Outubro/26'); }
 // ── Retorna a estrutura de times vigente para um índice de mês (ou para o mês em foco atual) ──
 function estruturaParaIdx(idx){
+  const inov = DADOS.meses.indexOf('Novembro/26');
+  if(inov>=0 && idx>=inov) return ERA_NOVEMBRO;
   const io = idxOutubro();
   return (io>=0 && idx>=io) ? ERA_OUTUBRO : ERA_SETEMBRO;
 }
@@ -1447,7 +1564,16 @@ function totalSemCloserFiltrado(){
 }
 
 // ── Render geral ──
+// ── Tema Black Friday: ativo quando o mês em foco (o mais recente marcado) é Novembro/26 ──
+function aplicaTemaMes(){
+  const idx = mesFocoAtual();
+  const bf = idx>=0 && DADOS.meses[idx]==='Novembro/26';
+  document.body.classList.toggle('tema-black', bf);
+  if(bf){ const el = $('bfMeta'); if(el) el.textContent = fmtMoeda(DADOS.metas[idx]); }
+}
+
 function render(){
+  aplicaTemaMes();
   const nMeses = st.meses.size;
   const filtroDiasTexto = (st.diaIni===1 && st.diaFim===31) ? '' : ` · dias ${st.diaIni}–${st.diaFim}`;
   $('contagem').innerHTML = `<strong>${nMeses}</strong> mês${nMeses>1?'es':''} selecionado${nMeses>1?'s':''} · ${[...st.meses].sort().map(i=>DADOS.meses[i]).join(', ')}${filtroDiasTexto}`;
@@ -1800,6 +1926,8 @@ render();
   const TEMPO_LIMITE_MS = 10000;
   const CLOSERS_LOW = ['LOW TICKET', 'LINKEDIN'];
   const CLOSER_DIEGO = 'DIEGO';
+  // Metas definidas aqui têm prioridade sobre a célula META da planilha
+  const METAS_FIXAS = { 'Novembro/26': 700000 };
 
   const app = document.getElementById('app-main');
   const codigo = app.textContent;
@@ -1851,6 +1979,7 @@ render();
       } else if (m.meta != null) {
         D.metas[idx] = m.meta;
       }
+      if (METAS_FIXAS[m.label] != null) D.metas[idx] = METAS_FIXAS[m.label];
 
       // origem/produto já classificados na versão salva são preservados
       const antigos = {};
@@ -1867,7 +1996,7 @@ render();
         const ant = (antigos[[t.d, t.c, t.s, t.v].join('|')] || []).shift();
         const isLow = CLOSERS_LOW.includes(t.c);
         tx.push({ d: t.d, f: t.f, c: t.c, s: t.s, v: t.v,
-          o: ant ? ant.o : t.o, p: ant ? ant.p : (isLow ? 'Low Ticket' : '') });
+          o: ant ? ant.o : t.o, p: t.p || (ant ? ant.p : (isLow ? 'Low Ticket' : '')) });
 
         tot[t.d] = (tot[t.d] || 0) + t.v;
         if (isLow || t.c === CLOSER_DIEGO) {
