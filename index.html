@@ -2006,12 +2006,14 @@ render();
         }
         garantePessoa(D, D.closers, [D.diarioCloser, D.reembolsoCloser], t.c);
         garantePessoa(D, D.sdrs, [D.diarioSDR, D.reembolsoSDR], t.s);
+        // Venda ainda sem closer/SDR preenchido: entra no total do dia (o dashboard mostra
+        // "inclui R$ X sem closer atribuído") e no ranking só de quem estiver preenchido.
         if (t.r) {
-          const rc = D.reembolsoCloser[t.c][idx]; rc[t.d] = (rc[t.d] || 0) + 1;
+          if (t.c) { const rc = D.reembolsoCloser[t.c][idx]; rc[t.d] = (rc[t.d] || 0) + 1; }
           if (t.s) { const rs = D.reembolsoSDR[t.s][idx]; rs[t.d] = (rs[t.d] || 0) + 1; }
         }
         if (!t.v) return;
-        const dc = D.diarioCloser[t.c][idx]; dc[t.d] = r2((dc[t.d] || 0) + t.v);
+        if (t.c) { const dc = D.diarioCloser[t.c][idx]; dc[t.d] = r2((dc[t.d] || 0) + t.v); }
         if (t.s) { const ds = D.diarioSDR[t.s][idx]; ds[t.d] = r2((ds[t.d] || 0) + t.v); }
       });
 
@@ -2040,10 +2042,4 @@ render();
     })
     .catch(err => {
       clearTimeout(timer);
-      console.warn('[HOD] usando versão salva:', err);
-      iniciar(base, { ok: false });
-    });
-})();
-</script>
-</body>
-</html>
+      console.warn(
