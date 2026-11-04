@@ -2042,4 +2042,10 @@ render();
     })
     .catch(err => {
       clearTimeout(timer);
-      console.warn(
+      console.warn('[HOD] usando versão salva:', err);
+      iniciar(base, { ok: false });
+    });
+})();
+</script>
+</body>
+</html>
