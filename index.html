@@ -644,7 +644,7 @@ body.tema-black footer{color:var(--tinta-2)}
     <br><br>
     <strong>A partir de outubro/26:</strong> Túlio e Misael saíram dos times de Closers — seus resultados deixam de contar para o total de Time A/B, mas continuam no Ranking de Closers e no somatório geral. Rafael e Leandro saíram dos times de SDR, com o mesmo tratamento (ranking e somatório geral, fora da soma por time). Vitor migrou para o <strong>Time 2 — "Clube das Winx"</strong>, que passa a ter só Iasmin e Vitor. O <strong>Time 1 — "Fantásticos Leads"</strong> passa a ter só Carioca e Beatriz. Alvaro deixou o Time 1 de SDRs e passou a ser closer do <strong>Time B</strong> (júnior, meta R$ 50.000/mês), que fica com Edu, Larissa, Rodrigo e Alvaro; vendas em que ele aparece como SDR seguem no Ranking de SDRs e no somatório geral, fora da soma por time. Michelly e Gustavo formam o novo <strong>Time 3 — "Sprinters"</strong>: não têm meta em R$ nem somatório de time (suas vendas contam no Ranking de SDRs e no somatório geral, mas não no total de nenhum time) — em vez disso, são acompanhados pela taxa de no-show das reuniões agendadas.
     <br><br>
-    <strong>A partir de novembro/26:</strong> Closers em <strong>Time A — "Galáticos"</strong> (Portuga · líder, Luigi, Paulo, João Pedro) e <strong>Time B</strong> (Larissa · líder, Rodrigo, Renan, Lauhen). Edu saiu do Time B: seus resultados seguem no Ranking de Closers e no somatório geral, fora da soma do time. SDRs em <strong>Time 1 — "Fantásticos Leads"</strong> (Rafael · líder, Beatriz, Carioca, Marcus, Gustavo) e <strong>Time 2 — "Clube das Winx"</strong> (Michelly · líder, Iasmin, Vitor, Alvaro, Carol). Novatos (João Pedro, Renan, Lauhen, Marcus e Carol) entram como Júnior. Michelly e Gustavo voltam aos times, por isso a seção Sprinters deixa de aparecer. O BOT sai do Clube das Winx — suas vendas seguem no Ranking de SDRs e no somatório geral. Meta de novembro: R$ 500.000.
+    <strong>A partir de novembro/26:</strong> Closers em <strong>Time A — "Galáticos"</strong> (Portuga · líder, Luigi, Paulo, João Pedro) e <strong>Time B</strong> (Larissa · líder, Rodrigo, Renan, Lauhen). Edu saiu do Time B: seus resultados seguem no Ranking de Closers e no somatório geral, fora da soma do time. SDRs em <strong>Time 1 — "Fantásticos Leads"</strong> (Rafael · líder, Beatriz, Carioca, Marcus, Gustavo) e <strong>Time 2 — "Clube das Winx"</strong> (Michelly · líder, Iasmin, Vitor, Alvaro, Carol). Novatos (João Pedro, Renan, Lauhen, Marcus e Carol) entram como Júnior. Michelly e Gustavo voltam aos times, por isso a seção Sprinters deixa de aparecer. O BOT sai do Clube das Winx — suas vendas seguem no Ranking de SDRs e no somatório geral. Meta de novembro: R$ 700.000.
     <br><br>
     Cada pessoa também tem uma categoria com meta individual mensal — os valores de SDR e Closer não se somam entre si (são complementares: a mesma venda é contabilizada uma vez do lado do closer e uma vez do lado do SDR).
     <div class="legenda-categorias">
@@ -1341,7 +1341,12 @@ function renderComposicao(){
   // Recuperação Diego (já rastreados à parte) e estornos
   const vendas = linhas.filter(t => t.c!=='LOW TICKET' && t.c!=='DIEGO' && t.o!=='REEMBOLSO' && t.v>0 && (t.p||'').toLowerCase()!=='low ticket');
   const tagsDe = t => (t.o||'').split('|');
-  const semRecorrencia = vendas.filter(t => !tagsDe(t).includes('RECORRENCIA'));
+  // Ticket médio real: a partir de nov/26 (vendas com forma de pagamento informada, campo pg)
+  // entram só as vendas À VISTA; até out/26 segue a regra antiga (sem recorrência).
+  const semRecorrencia = vendas.filter(t => t.pg !== undefined ? t.pg === 'AVISTA' : !tagsDe(t).includes('RECORRENCIA'));
+  const temNovo = vendas.some(t => t.pg !== undefined), temAntigo = vendas.some(t => t.pg === undefined);
+  $('kTicketRealDet').textContent = temNovo && !temAntigo ? 'somente vendas à vista'
+    : (temNovo ? 'vendas à vista (nov/26 em diante) e sem recorrência (até out/26)' : 'sem recorrência — valor integral das vendas');
 
   const ticketNominal = vendas.length ? vendas.reduce((s,t)=>s+t.v,0)/vendas.length : 0;
   const ticketReal = semRecorrencia.length ? semRecorrencia.reduce((s,t)=>s+t.v,0)/semRecorrencia.length : 0;
@@ -1926,7 +1931,7 @@ render();
   const CLOSERS_LOW = ['LOW TICKET', 'LINKEDIN'];
   const CLOSER_DIEGO = 'DIEGO';
   // Metas definidas aqui têm prioridade sobre a célula META da planilha
-  const METAS_FIXAS = { 'Novembro/26': 500000 };
+  const METAS_FIXAS = { 'Novembro/26': 700000 };
 
   const app = document.getElementById('app-main');
   const codigo = app.textContent;
@@ -1996,6 +2001,8 @@ render();
         const isLow = CLOSERS_LOW.includes(t.c);
         tx.push({ d: t.d, f: t.f, c: t.c, s: t.s, v: t.v,
           o: ant ? ant.o : t.o, p: t.p || (ant ? ant.p : (isLow ? 'Low Ticket' : '')) });
+        // A partir de nov/26 a planilha informa a forma de pagamento (à vista / parcelado)
+        if (t.pg !== undefined) tx[tx.length - 1].pg = t.pg;
 
         tot[t.d] = (tot[t.d] || 0) + t.v;
         if (isLow || t.c === CLOSER_DIEGO) {
