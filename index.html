@@ -644,7 +644,7 @@ body.tema-black footer{color:var(--tinta-2)}
     <br><br>
     <strong>A partir de outubro/26:</strong> Túlio e Misael saíram dos times de Closers — seus resultados deixam de contar para o total de Time A/B, mas continuam no Ranking de Closers e no somatório geral. Rafael e Leandro saíram dos times de SDR, com o mesmo tratamento (ranking e somatório geral, fora da soma por time). Vitor migrou para o <strong>Time 2 — "Clube das Winx"</strong>, que passa a ter só Iasmin e Vitor. O <strong>Time 1 — "Fantásticos Leads"</strong> passa a ter só Carioca e Beatriz. Alvaro deixou o Time 1 de SDRs e passou a ser closer do <strong>Time B</strong> (júnior, meta R$ 50.000/mês), que fica com Edu, Larissa, Rodrigo e Alvaro; vendas em que ele aparece como SDR seguem no Ranking de SDRs e no somatório geral, fora da soma por time. Michelly e Gustavo formam o novo <strong>Time 3 — "Sprinters"</strong>: não têm meta em R$ nem somatório de time (suas vendas contam no Ranking de SDRs e no somatório geral, mas não no total de nenhum time) — em vez disso, são acompanhados pela taxa de no-show das reuniões agendadas.
     <br><br>
-    <strong>A partir de novembro/26:</strong> Closers em <strong>Time A — "Galáticos"</strong> (Portuga · líder, Luigi, Paulo, João Pedro) e <strong>Time B</strong> (Larissa · líder, Rodrigo, Renan, Lauhen). Edu saiu do Time B: seus resultados seguem no Ranking de Closers e no somatório geral, fora da soma do time. SDRs em <strong>Time 1 — "Fantásticos Leads"</strong> (Rafael · líder, Beatriz, Carioca, Marcus, Gustavo) e <strong>Time 2 — "Clube das Winx"</strong> (Michelly · líder, Iasmin, Vitor, Alvaro, Carol). Novatos (João Pedro, Renan, Lauhen, Marcus e Carol) entram como Júnior. Michelly e Gustavo voltam aos times, por isso a seção Sprinters deixa de aparecer. O BOT sai do Clube das Winx — suas vendas seguem no Ranking de SDRs e no somatório geral. Meta de novembro: R$ 500.000.
+    <strong>A partir de novembro/26:</strong> Closers em <strong>Time A — "Galáticos"</strong> (Portuga · líder, Luigi, Paulo, João Pedro) e <strong>Time B — "Discípulos de Lery Lery"</strong> (Larissa · líder, Rodrigo, Renan, Lauhen). Edu saiu do Time B: seus resultados seguem no Ranking de Closers e no somatório geral, fora da soma do time. SDRs em <strong>Time 1 — "Fantásticos Leads"</strong> (Rafael · líder, Beatriz, Carioca, Marcus, Gustavo) e <strong>Time 2 — "Clube das Winx"</strong> (Michelly · líder, Iasmin, Vitor, Alvaro, Carol). Novatos (João Pedro, Renan, Lauhen, Marcus e Carol) entram como Júnior. Michelly e Gustavo voltam aos times, por isso a seção Sprinters deixa de aparecer. O BOT sai do Clube das Winx — suas vendas seguem no Ranking de SDRs e no somatório geral. Meta de novembro: R$ 500.000.
     <br><br>
     Cada pessoa também tem uma categoria com meta individual mensal — os valores de SDR e Closer não se somam entre si (são complementares: a mesma venda é contabilizada uma vez do lado do closer e uma vez do lado do SDR).
     <div class="legenda-categorias">
@@ -961,7 +961,7 @@ const ERA_NOVEMBRO = {
   },
   timesCloser: {
     A: { nome:'Galáticos', sigla:'TIME A', badge:'tA', icone:'brasao', membros:['LEANDRO PT','LUIGI','PAULO','JOÃO PEDRO'] },
-    B: { nome:'Time B',    sigla:'TIME B', badge:'tB', membros:['LARISSA','RODRIGO','RENAN','LAUHEN'] },
+    B: { nome:'Discípulos de Lery Lery', sigla:'TIME B', badge:'tB', icone:'coroa', membros:['LARISSA','RODRIGO','RENAN','LAUHEN'] },
   },
   timesSdr: {
     '1': { nome:'Fantásticos Leads', sigla:'TIME 1', badge:'t1', icone:'badge4', membros:['RAFAEL','BEATRIZ','CARIOCA','MARCUS','GUSTAVO'] },
@@ -1231,6 +1231,29 @@ const ICONE_BADGE4 = `<svg class="fairy-icon" viewBox="0 0 44 44" xmlns="http://
   <text x="22" y="27.5" font-family="'Bricolage Grotesque',sans-serif" font-weight="800" font-size="17" fill="#F4EEDD" text-anchor="middle">4</text>
 </svg>`;
 
+// Ícone decorativo (coroa/nemes de rainha egípcia) — ilustração própria e genérica, usada pelo
+// Time B de closers ("Discípulos de Lery Lery") a partir de novembro/26.
+const ICONE_COROA = `<svg class="fairy-icon" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <clipPath id="clipNemes"><path d="M22 3.5 C30.5 3.5 36.2 8 37.2 14.5 L40.5 34.5 L33.5 40.5 L31.2 27 C30.4 22.6 27 20.2 22 20.2 C17 20.2 13.6 22.6 12.8 27 L10.5 40.5 L3.5 34.5 L6.8 14.5 C7.8 8 13.5 3.5 22 3.5 Z"/></clipPath>
+  </defs>
+  <path d="M22 3.5 C30.5 3.5 36.2 8 37.2 14.5 L40.5 34.5 L33.5 40.5 L31.2 27 C30.4 22.6 27 20.2 22 20.2 C17 20.2 13.6 22.6 12.8 27 L10.5 40.5 L3.5 34.5 L6.8 14.5 C7.8 8 13.5 3.5 22 3.5 Z" fill="#D9A441"/>
+  <g clip-path="url(#clipNemes)" fill="#4F7345">
+    <rect x="0" y="6.2" width="44" height="2.2"/><rect x="0" y="10.6" width="44" height="2.2"/>
+    <rect x="0" y="15" width="44" height="2.2"/><rect x="0" y="19.4" width="44" height="2.2"/>
+    <rect x="0" y="23.8" width="44" height="2.2"/><rect x="0" y="28.2" width="44" height="2.2"/>
+    <rect x="0" y="32.6" width="44" height="2.2"/><rect x="0" y="37" width="44" height="2.2"/>
+  </g>
+  <path d="M22 3.5 C30.5 3.5 36.2 8 37.2 14.5 L40.5 34.5 L33.5 40.5 L31.2 27 C30.4 22.6 27 20.2 22 20.2 C17 20.2 13.6 22.6 12.8 27 L10.5 40.5 L3.5 34.5 L6.8 14.5 C7.8 8 13.5 3.5 22 3.5 Z" fill="none" stroke="#5A3D0E" stroke-width="1.1" stroke-linejoin="round"/>
+  <ellipse cx="22" cy="29.5" rx="8" ry="9.6" fill="#B07A52" stroke="#5A3D0E" stroke-width="0.8"/>
+  <path d="M13.4 22.6 C16 19.8 28 19.8 30.6 22.6 L30 25 C27 22.8 17 22.8 14 25 Z" fill="#E8C063" stroke="#5A3D0E" stroke-width="0.7"/>
+  <path d="M22 7.2 C23.6 8.2 23.6 10.3 22.6 11.4 L23.6 21.6 L20.4 21.6 L21.4 11.4 C20.4 10.3 20.4 8.2 22 7.2 Z" fill="#D9A441" stroke="#5A3D0E" stroke-width="0.6"/>
+  <circle cx="22" cy="9.4" r="1.05" fill="#C0392B"/>
+  <circle cx="13.6" cy="31.5" r="1.3" fill="#D9A441" stroke="#5A3D0E" stroke-width="0.4"/><circle cx="30.4" cy="31.5" r="1.3" fill="#D9A441" stroke="#5A3D0E" stroke-width="0.4"/>
+  <path d="M18.3 28 Q19.7 27.2 21 28 M23 28 Q24.3 27.2 25.7 28" stroke="#2B1A0A" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+  <path d="M20.2 33.4 Q22 34.4 23.8 33.4" stroke="#7A3B22" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+</svg>`;
+
 // Ícone decorativo (fadinha genérica) — ilustração própria, sem referência a marcas registradas.
 const ICONE_FADA = `<svg class="fairy-icon" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <g transform="translate(22,23)">
@@ -1254,7 +1277,7 @@ const ICONE_FADA = `<svg class="fairy-icon" viewBox="0 0 44 44" xmlns="http://ww
 // que já soma os meses marcados no filtro). Sprinters NÃO passa por aqui — tem seção própria.
 function renderTimeCard(container, timeKey, timeInfo, mapaDiario, metaTime, pessoas){
   const membros = timeInfo.membros;
-  const iconeHtml = timeInfo.icone==='badge4' ? ICONE_BADGE4 : (timeInfo.icone==='fada' ? ICONE_FADA : (timeInfo.icone==='brasao' ? ICONE_BRASAO : ''));
+  const iconeHtml = timeInfo.icone==='badge4' ? ICONE_BADGE4 : (timeInfo.icone==='fada' ? ICONE_FADA : (timeInfo.icone==='brasao' ? ICONE_BRASAO : (timeInfo.icone==='coroa' ? ICONE_COROA : '')));
   const div = document.createElement('div');
   div.className = 'team-card';
 
